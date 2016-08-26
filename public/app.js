@@ -16,5 +16,11 @@
         controller: 'offeringsCtrl',
         controllerAs: 'vm'
       })
+      .state('listings', {
+        url: '/listings',
+        templateUrl: './listings/listings.html',
+        controller: 'listingsCtrl',
+        controllerAs: 'vm'
+      })
   })
 })();
