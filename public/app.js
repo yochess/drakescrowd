@@ -16,6 +16,12 @@
         controller: 'offeringsCtrl',
         controllerAs: 'vm'
       })
+      .state('offeringDetail', {
+        url: '/offerings/:id',
+        templateUrl: './offerings/offering.html',
+        controller: 'offeringsCtrl',
+        controllerAs: 'vm'
+      })
       .state('listings', {
         url: '/listings',
         templateUrl: './listings/listings.html',

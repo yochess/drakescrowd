@@ -1,10 +1,12 @@
-<div class="offerings">
+<div ng-show="!vm.id" class="offerings">
 
   <div class="row">
     <div class="col-md-4" ng-repeat="offering in vm.offerings">
       <div class="offering-name">{{offering.name}}</div>
       <div class="offering-company">by {{offering.company}}</div>
-      <div class="image-container"><img src="{{offering.img}}"></img></div>
+      <div class="image-container">
+        <a ui-sref="offeringDetail({id: offering.id})"><img src="{{offering.img}}"></img></a>
+      </div>
       <div class="offering-type">Investment Type: {{offering.type}}</div>
       <div class="offering-min">Min. Investment: {{offering.min | currency}}</div>
       <div class="offering-target">
