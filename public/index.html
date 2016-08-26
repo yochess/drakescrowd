@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="drakesCrowd">
 <head>
 
   <!-- Bootstrap CSS -->
@@ -12,13 +12,56 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <!-- Angular -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.8/angular-resource.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
   <!-- Angular UI-Router -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+  <!-- My Styles -->
+  <link rel="stylesheet" href="./css/jumbotron-narrow.css">
+
+  <!-- My Script s-->
+  <script src="./app.js"></script>
+  <script src="./main/main.js"></script>
+
   <title>Drake's Crowd</title>
 </head>
 <body>
-test
+
+  <div class="container">
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+
+          <!-- available to public -->
+          <li role="presentation"><a href="#">Home</a></li>
+          <li role="presentation"><a href="#">About</a></li>
+          <li role="presentation"><a href="#">Contact</a></li>
+          <li role="presentation"><a href="#">Login</a></li>
+          <li role="presentation"><a href="#">Signup</a></li>
+          <li role="presentation"><a href="#">Logout</a></li>
+          <li role="presentation"><a href="#">Offerings</a></li>
+
+          <!-- for Investors -->
+          <li role="presentation"><a href="#">Portfolio</a></li>
+
+          <!-- for Real Estate Companies -->
+          <li role="presentation"><a href="#">My Listings</a></li>
+
+        </ul>
+      </nav>
+      <h3 class="text-muted">Drake's Crowd</h3>
+    </div>
+
+   <div ui-view></div>
+
+    <footer class="footer">
+      <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+
+  </div> <!-- /container -->
+
+
+
 </body>
 </html>
