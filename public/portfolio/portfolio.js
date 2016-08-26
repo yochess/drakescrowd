@@ -2,14 +2,12 @@
   'use strict';
 
   angular.module('drakesCrowd')
-  .controller('listingsCtrl', [
+  .controller('portfolioCtrl', [
     'Main',
     function(Main) {
       const vm = this;
 
       vm.offerings = Main.offerings;
-
-      vm.info = {};
 
       vm.sortConditions = {
         name: null,
@@ -38,9 +36,6 @@
 
       };
 
-      vm.submit = () => {
-        console.log(vm.info);
-      };
 
     }]);
 

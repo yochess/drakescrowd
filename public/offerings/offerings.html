@@ -1,34 +1,50 @@
-<div ng-show="!vm.id" class="offerings">
+<div class="offerings" ng-show="!vm.id">
 
+  <!-- row -->
   <div class="row">
+
+    <!-- col and ng-repeat -->
     <div class="col-md-4" ng-repeat="offering in vm.offerings">
-      <div class="offering-name">{{offering.name}}</div>
-      <div class="offering-company">by {{offering.company}}</div>
-      <div class="image-container">
+
+      <!-- offering head -->
+      <div class="offering-head">
+        <h4 class="text-center">{{offering.name}}</h4>
+        <h5 class="text-center">by {{offering.company}}</h5>
+      </div>
+      <!-- end offering head -->
+
+      <!-- image c-->
+      <div class="image-container img-responsive" alt="Responsive image">
         <a ui-sref="offeringDetail({id: offering.id})"><img src="{{offering.img}}"></img></a>
       </div>
-      <div class="offering-type">Investment Type: {{offering.type}}</div>
-      <div class="offering-min">Min. Investment: {{offering.min | currency}}</div>
-      <div class="offering-target">
+      <!-- end image -->
+
+      <!-- offering body -->
+      <div class="offering-body">
         <div class="row">
-          <div class="col-md-4">
-            <div class="offering-irr">
-              Target Return:
-              <br>
-              {{vm.toPercent(offering.target.irr)}}
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="offering-cash">
-              Target Annual Cash
-              <br>
-              {{vm.toPercent(offering.target.cash)}}
-            </div>
-          </div>
+          <div class="col-sm-7 text-right">Investment Type: </div>
+          <div class="col-sm-5 text-right">{{offering.type}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 text-right">Min. Investment: </div>
+          <div class="col-sm-5 text-right">{{offering.min | currency}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 text-right">Target Return (IRR): </div>
+          <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.irr)}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7 text-right">Target Annual Cash</div>
+          <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.cash)}}</div>
         </div>
       </div>
+      <!-- end offering body -->
+
     </div>
+    <!-- end col and ng-repeat -->
+
   </div>
+  <!-- end row -->
 
 </div>
 

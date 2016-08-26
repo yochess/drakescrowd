@@ -28,5 +28,11 @@
         controller: 'listingsCtrl',
         controllerAs: 'vm'
       })
+      .state('portfolio', {
+        url: '/portfolio',
+        templateUrl: './portfolio/portfolio.html',
+        controller: 'portfolioCtrl',
+        controllerAs: 'vm'
+      })
   })
 })();

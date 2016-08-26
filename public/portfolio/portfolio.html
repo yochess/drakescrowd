@@ -1,0 +1,30 @@
+<div class="portfolio">
+
+  <div class="portfolio-view">
+    <h4>My Portfolio</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('name')"></span></td>
+          <td>Company</td>
+          <td>Type</td>
+          <td>Min. Investment<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('min')"></span></td>
+          <td>Hold Period</td>
+          <td>Target Return</td>
+          <td>Target Annual Cash</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="offering in vm.offerings">
+          <td>{{offering.name}}</td>
+          <td>{{offering.company}}</td>
+          <td>{{offering.type}}</td>
+          <td>{{offering.min | currency}}</td>
+          <td>{{offering.hold}}</td>
+          <td>{{vm.toPercent(offering.target.irr)}}</td>
+          <td>{{vm.toPercent(offering.target.cash)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

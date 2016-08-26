@@ -3,7 +3,7 @@
   <!-- listings view -->
   <div class="listing-view">
     <h4>My Listings</h4>
-    <table border>
+    <table class="table table-border">
       <thead>
         <tr>
           <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('name')"></span></td>
@@ -32,39 +32,88 @@
 
   <!-- create new listing view -->
   <div class="listing-form">
-    <form ng-submit="vm.submit()">
-      <div class="input-group">
-        <label>Name: </label>
-        <input type="text" class="input-control" placeholder="Enter Property Name" ng-model="vm.info.name">
-      </div>
-      <div class="input-group">
-        <label>Image: </label>
-        <input type="text" class="input-control" placeholder="UNDER CONSTRUCTION" ng-model="vm.info.img">
-        <div class="input-group">
-          <label>Type: </label>
-          <input type="text" class="input-control" placeholder="Enter Property Type" ng-model="vm.info.type">
-        </div>
-        <div class="input-group">
-          <label>Min Investment: </label>
-          <span class="input-group-addon">$</span>
-          <input type="text" class="input-control" placeholder="Enter Min Investment" ng-model="vm.info.min">
-        </div>
-        <div class="input-group">
-          <label>Hold Period (Years): </label>
-          <input type="text" class="input-control" placeholder="Enter Hold Period" ng-model="vm.info.hold">
-        </div>
-        <div class="input-group">
-          <label>Target IRR: </label>
-          <input type="text" class="input-control" placeholder="Enter Target IRR" ng-model="vm.info.irr">
-          <span class="input-group-addon">%</span>
-        </div>
-        <div class="input-group">
-          <label>Target Cash: </label>
-          <input type="text" class="input-control" placeholder="Enter Target Cash Flow" ng-model="vm.info.cash">
-          <span class="input-group-addon">%</span>
+    <h4>New Listing</h4>
+    <form class="form-horizontal" ng-submit="vm.submit()">
+
+      <!-- name input -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Name: </label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter Property Name" ng-model="vm.info.name">
         </div>
       </div>
-      <button type="submit">Submit</button>
+      <!-- end name input -->
+
+      <!-- image input -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Image Upload: </label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="UNDER CONSTRUCTION" ng-model="vm.info.img">
+        </div>
+      </div>
+      <!-- end input upload -->
+
+      <!-- property type -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Property Type: </label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter Property Type" ng-model="vm.info.type">
+        </div>
+      </div>
+      <!-- end property type -->
+
+      <!-- min investment -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Min Investment: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" placeholder="Enter Min Investment" ng-model="vm.info.min">
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <!-- end min investment -->
+
+      <!-- hold period -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Hold Period (Years): </label>
+       <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter No. of Years" ng-model="vm.info.hold">
+        </div>
+      </div>
+      <!-- end hold period -->
+
+      <!-- IRR -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Target IRR: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.target.irr">
+            <div class="input-group-addon">%</div>
+          </div>
+        </div>
+      </div>
+      <!-- end IRR -->
+
+      <!-- cash flow -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Target Cash: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.target.cash">
+            <div class="input-group-addon">%</div>
+          </div>
+        </div>
+      </div>
+      <!-- end cash flow -->
+
+      <!-- button -->
+      <div class="col-sm-2 text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <!-- end button -->
+
     </form>
   </div>
   <!-- end create new listing view -->
