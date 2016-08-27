@@ -3,7 +3,7 @@
 
   const app = angular.module('drakesCrowd')
 
-  app.controller('authCtrl', ['Auth', function(Auth) {
+  app.controller('authCtrl', ['Auth', '$state', function(Auth, $state) {
     const vm = this;
 
     vm.auth = {};
@@ -35,9 +35,23 @@
       vm.auth = {};
     };
 
+    vm.logout = () => {
+      Auth.logout().then(() => { $state.go('home') });
+    }
+
   }]);
 
   app.factory('Auth', ['$http', '$q', function($http, $q) {
+    let user = null;
+
+    const isLoggedIn = () => {
+      return user ? true : false;
+    };
+
+    const getUserStatus = () => {
+      return user;
+    };
+
 
     const signup = (user) => {
       const deferred = $q.defer();
@@ -63,9 +77,23 @@
       return deferred.promise;
     };
 
+    const logout = () => {
+      const deferred = $q.defer();
+
+      $http.get('/auth/logout')
+        .success(data => {
+          user = false;
+          deferred.resolve();
+        })
+        .error(data => { deferred.reject() });
+
+      return deferred.promise;
+    };
+
     return {
       signup,
-      login
+      login,
+      logout
     }
 
   }]);

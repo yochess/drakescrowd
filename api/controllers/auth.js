@@ -46,7 +46,13 @@ const login = (req, res, next) => {
   })(req, res, next);
 };
 
+const logout = (req, res) => {
+  req.logout();
+  res.status(200).send('Logged Out!');
+}
+
 export default {
   login,
-  signup
+  signup,
+  logout
 };

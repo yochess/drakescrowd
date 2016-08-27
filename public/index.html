@@ -41,11 +41,12 @@
         <ul class="nav nav-pills pull-right">
 
           <!-- available to public -->
-          <li role="presentation"><a href="#/home">Home</a></li>
-          <li role="presentation"><a href="#/login">Login</a></li>
-          <li role="presentation"><a href="#/signup">Signup</a></li>
-          <li role="presentation"><a href="#">Logout</a></li>
-          <li role="presentation"><a href="#/offerings">Offerings</a></li>
+          <li role="presentation"><a ui-sref="home">Home</a></li>
+          <li role="presentation"><a ui-sref="login">Login</a></li>
+          <li role="presentation"><a ui-sref="signup">Signup</a></li>
+          <li role="presentation" ng-controller="authCtrl as vm">
+            <a ng-click="vm.logout()">Logout</a></li>
+          <li role="presentation"><a ui-sref="offerings">Offerings</a></li>
 
           <!-- for Investors -->
           <li role="presentation"><a href="#/portfolio">Portfolio</a></li>
