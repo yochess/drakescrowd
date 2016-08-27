@@ -5,8 +5,8 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
-// import authRouter from './routes/auth.js';
-import apiRouter from './routes/api.js';
+import authRouter from './api/routes/auth.js';
+import apiRouter from './api/routes/api.js';
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/drakescrowd');
 
@@ -25,7 +25,7 @@ app.use(passport.session());
 
 app.use(express.static('public'));
 
-// app.use('/auth', authRouter);
+app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
