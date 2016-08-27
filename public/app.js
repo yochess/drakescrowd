@@ -1,8 +1,9 @@
 (() => {
   'use strict';
 
-  angular.module('drakesCrowd', ['ui.router'])
-  .config([
+  const app = angular.module('drakesCrowd', ['ui.router'])
+
+  app.config([
     '$stateProvider',
     '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
@@ -31,11 +32,6 @@
           controller: 'authCtrl',
           controllerAs: 'vm'
         })
-        .state('logout', {
-          url: '/logout',
-          controller: 'authCtrl',
-          controllerAs: 'vm'
-        })
         .state('home', {
           url: '/home',
           templateUrl: './main/home.html',
@@ -58,19 +54,53 @@
           url: '/listings',
           templateUrl: './listings/listings.html',
           controller: 'listingsCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          resolve: {
+            security: ['$q', 'Auth', function($q, Auth) {
+              if (Auth.getUserTypeSync() !== 'company'){
+                return $q.reject("Not Company");
+              }
+            }]
+          }
         })
         .state('listingDetail', {
           url: '/listings/:id',
           templateUrl: './listings/listing.html',
           controller: 'listingsCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          resolve: {
+            security: ['$q', 'Auth', function($q, Auth) {
+              if (Auth.getUserTypeSync() !== 'company'){
+                return $q.reject("Not Company");
+              }
+            }]
+          }
         })
         .state('portfolio', {
           url: '/portfolio',
           templateUrl: './portfolio/portfolio.html',
           controller: 'portfolioCtrl',
-          controllerAs: 'vm'
-        })
-    }])
+          controllerAs: 'vm',
+          resolve: {
+            security: ['$q', 'Auth', function($q, Auth) {
+              if (Auth.getUserTypeSync() !== 'investor'){
+                return $q.reject("Not Investor");
+              }
+            }]
+          }
+        });
+  }])
+
+  // this is super hacky (got into a huge rabbit hole b/c of ui-router)
+  app.run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
+    Auth.getUserTypeAsync().then(() => {
+      $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
+        $state.go('home');
+      });
+    });
+
+
+  }]);
+
+
 })();

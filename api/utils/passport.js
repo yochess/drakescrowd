@@ -24,6 +24,7 @@ passport.use('local-signup', new LocalStrategy(
   {passReqToCallback: true},
   (req, username, password, done) => {
     const user = req.session.userType === 'investor' ? Investor : Company;
+    const info = req.session.userType === 'investor' ? 'investor' : 'company';
 
     user.findOne({where: {username}}).then(userExists => {
       if (userExists) {
@@ -32,7 +33,7 @@ passport.use('local-signup', new LocalStrategy(
       bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
           user.create({username: username, password: hash})
-            .then(newUser => done(null, newUser, 'Created User!'))
+            .then(newUser => done(null, newUser, info))
             .catch(err => done(err))
           });
       });
@@ -44,6 +45,7 @@ passport.use('local-login', new LocalStrategy(
   {passReqToCallback: true},
   (req, username, password, done) => {
     const user = req.session.userType === 'investor' ? Investor : Company;
+    const info = req.session.userType === 'investor' ? 'investor' : 'company';
 
     user.findOne({where: {username}}).then(user => {
       if (!user) {
@@ -56,7 +58,7 @@ passport.use('local-login', new LocalStrategy(
         if (!isMatch) {
           return done(null, false, 'Incorrect Username or Password');
         }
-        return done(null, user, 'Signed In!');
+        return done(null, user, info);
       });
 
     })

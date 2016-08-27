@@ -49,10 +49,19 @@ const login = (req, res, next) => {
 const logout = (req, res) => {
   req.logout();
   res.status(200).send('Logged Out!');
+};
+
+const userType = (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(200).send('');
+  }
+  const userType = req.session.passport.user.slice(0,8) === 'investor' ? 'investor' : 'company';
+  return res.status(200).send(userType);
 }
 
 export default {
   login,
   signup,
-  logout
+  logout,
+  userType
 };

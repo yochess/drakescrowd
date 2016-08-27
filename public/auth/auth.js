@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const app = angular.module('drakesCrowd')
+  const app = angular.module('drakesCrowd');
 
   app.controller('authCtrl', ['Auth', '$state', function(Auth, $state) {
     const vm = this;
@@ -11,45 +11,48 @@
     vm.signup = (userType) => {
       vm.auth.userType = userType;
 
-      Auth.signup(vm.auth)
-        .then(() => {
-          console.log('signed up!');
-        })
-        .catch(() => {
-          console.log('error in signing in');
-        });
+      Auth.signup(vm.auth).then(() => {
+        const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
+        $state.go(link);
+      })
 
       vm.auth = {};
     };
 
     vm.login = (userType) => {
       vm.auth.userType = userType;
-      Auth.login(vm.auth)
-      .then(() => {
-        console.log('logged in!');
-      })
-      .catch(() => {
-        console.log('error in logging in');
+
+      Auth.login(vm.auth).then(() => {
+        const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
+        $state.go(link);
       });
 
       vm.auth = {};
     };
 
     vm.logout = () => {
-      Auth.logout().then(() => { $state.go('home') });
+      Auth.logout().then(() => {
+        $state.go('home')
+      });
     }
 
   }]);
 
   app.factory('Auth', ['$http', '$q', function($http, $q) {
-    let user = null;
+    let userType = '';
 
-    const isLoggedIn = () => {
-      return user ? true : false;
+    const getUserTypeSync = () => {
+      return userType;
     };
 
-    const getUserStatus = () => {
-      return user;
+    const getUserTypeAsync = () => {
+      return $http
+        .get('/auth/userType')
+        .success(data => {
+          userType = data;
+          console.log(data);
+        })
+        .error(err => { userType = ''});
     };
 
 
@@ -58,9 +61,15 @@
 
       $http.post('/auth/signup', user)
         .success((data, status) => {
-          status !== 201 ? deferred.reject() : deferred.resolve();
+          if (status !== 201) {
+            userType = '';
+            deferred.reject();
+          } else {
+            userType = data;
+            deferred.resolve();
+          }
         })
-        .error((data) => { deferred.reject() });
+        .error(data => { deferred.reject() });
 
       return deferred.promise;
     };
@@ -70,7 +79,13 @@
 
       $http.post('/auth/login', user)
         .success((data, status) => {
-          status !== 200 ? deferred.reject() : deferred.resolve();
+          if (status !== 200) {
+            userType = '';
+            deferred.reject();
+          } else {
+            userType = data;
+            deferred.resolve();
+          }
         })
         .error(data => { deferred.reject() });
 
@@ -82,7 +97,7 @@
 
       $http.get('/auth/logout')
         .success(data => {
-          user = false;
+          userType = '';
           deferred.resolve();
         })
         .error(data => { deferred.reject() });
@@ -91,6 +106,8 @@
     };
 
     return {
+      getUserTypeSync,
+      getUserTypeAsync,
       signup,
       login,
       logout

@@ -14,7 +14,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(session({
-  secret: process.env.SECRET || 'asdf'
+  secret: process.env.SECRET || 'asdf',
+  resave: false,
+  saveUninitialized: false
 }));
 
 app.use(passport.initialize());
