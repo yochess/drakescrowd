@@ -1,9 +1,8 @@
 (() => {
   'use strict';
-
   const app = angular.module('drakesCrowd')
 
-  app.controller('mainCtrl', ['$scope', function($scope) {
+  app.controller('mainCtrl', ['Auth', function(Auth) {
     const vm = this;
 
   }]);

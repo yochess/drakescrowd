@@ -24,17 +24,11 @@
 
       Auth.login(vm.auth).then(() => {
         const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
-        $state.go(link);
+        $state.go(link,{reload:true});
       });
 
       vm.auth = {};
     };
-
-    vm.logout = () => {
-      Auth.logout().then(() => {
-        $state.go('home')
-      });
-    }
 
   }]);
 
@@ -50,7 +44,6 @@
         .get('/auth/userType')
         .success(data => {
           userType = data;
-          console.log(data);
         })
         .error(err => { userType = ''});
     };
@@ -69,7 +62,10 @@
             deferred.resolve();
           }
         })
-        .error(data => { deferred.reject() });
+        .error(data => {
+          userType = '';
+          deferred.reject();
+        });
 
       return deferred.promise;
     };
@@ -87,7 +83,10 @@
             deferred.resolve();
           }
         })
-        .error(data => { deferred.reject() });
+        .error(data => {
+          userType = '';
+          deferred.reject();
+        });
 
       return deferred.promise;
     };
@@ -100,7 +99,10 @@
           userType = '';
           deferred.resolve();
         })
-        .error(data => { deferred.reject() });
+        .error(data => {
+          userType = '';
+          deferred.reject();
+        });
 
       return deferred.promise;
     };
