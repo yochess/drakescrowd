@@ -4,15 +4,16 @@ import listingsCtrl from '../controllers/listings.js';
 import offeringsCtrl from '../controllers/offerings.js'
 
 const apiRouter = express.Router();
-
-
 apiRouter
-  .post('/listings', listingsCtrl.createNewListing)
-  .get('/listings', listingsCtrl.fetchAllListings);
-
-apiRouter
-  .get('/offerings', offeringsCtrl.fetchAllOfferings)
+  .get('/offerings', offeringsCtrl.fetchOfferings)
   .get('/offerings/:id', offeringsCtrl.fetchOffering);
+
+
+apiRouter
+  .get('/listings', listingsCtrl.fetchListings)
+  .get('/listings/:id', listingsCtrl.fetchListing)
+  .post('/listings', listingsCtrl.createNewListing);
+
 
 apiRouter
   .get('/portfolio', (req, res) => {

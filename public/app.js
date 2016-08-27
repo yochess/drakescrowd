@@ -28,6 +28,12 @@
         controller: 'listingsCtrl',
         controllerAs: 'vm'
       })
+      .state('listingDetail', {
+        url: '/listings/:id',
+        templateUrl: './listings/listing.html',
+        controller: 'listingsCtrl',
+        controllerAs: 'vm'
+      })
       .state('portfolio', {
         url: '/portfolio',
         templateUrl: './portfolio/portfolio.html',

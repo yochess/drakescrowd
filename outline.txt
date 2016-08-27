@@ -3,8 +3,9 @@
   - display info on specific offering
 
 2) Company API
-  - company can create new listing (get /listings)
+  - company can create new listing (post /listings)
   - company should not be able to edit listing once created
-  - company decides when to close investment (post /listings/:id)
-  - company has the right to approve or reject an investment
-
+  - company can get info on all listings (get /listings)
+  - company can get info on single listing + investors (get /listings/:id)
+  - company decides when to close investment (post /listings/listing/:id)
+  - company can approve or reject a customer (post /listings/listing/:id)

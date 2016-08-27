@@ -4,12 +4,28 @@
   angular.module('drakesCrowd')
   .controller('listingsCtrl', [
     'Main',
-    function(Main) {
+    '$stateParams',
+    function(Main, $stateParams) {
       const vm = this;
 
-      vm.offerings = Main.offerings;
-
+      vm.listings = [];
+      vm.listing = null;
+      vm.id = +$stateParams.id;
       vm.info = {};
+
+      const displayListings = () => {
+        Main.fetchListings()
+          .then(listings => {vm.listings = listings});
+      };
+
+      const displayListing = () => {
+        Main.fetchListing(vm.id)
+          .then(listing => {vm.listing = listing});
+      }
+
+      vm.id ? displayListing() : displayListings();
+
+      // below needs work
 
       vm.sortConditions = {
         name: null,
@@ -19,7 +35,7 @@
       vm.toPercent = (num) => `${num * 100}%`;
       vm.sortBy = (type) => {
 
-        vm.offerings = vm.offerings.sort((a, b) => {
+        vm.listings = vm.listings.sort((a, b) => {
           if (!vm.sortConditions[type]) {
             if (a[type] < b[type])
               return -1;

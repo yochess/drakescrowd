@@ -7,23 +7,21 @@
       <thead>
         <tr>
           <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('name')"></span></td>
-          <td>Image</td>
           <td>Type</td>
           <td>Min. Investment<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('min')"></span></td>
-          <td>Hold Period</td>
           <td>Target Return</td>
           <td>Target Annual Cash</td>
+          <td>Available</td>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="offering in vm.offerings">
-          <td>{{offering.name}}</td>
-          <td>img feature</td>
-          <td>{{offering.type}}</td>
-          <td>{{offering.min | currency}}</td>
-          <td>{{offering.hold}}</td>
-          <td>{{vm.toPercent(offering.target.irr)}}</td>
-          <td>{{vm.toPercent(offering.target.cash)}}</td>
+        <tr ng-repeat="listing in vm.listings">
+          <td><a ui-sref="listingDetail({id: listing.id})">{{listing.name}}</a></td>
+          <td>{{listing.type}}</td>
+          <td>{{listing.min | currency}}</td>
+          <td>{{vm.toPercent(listing.target.irr)}}</td>
+          <td>{{vm.toPercent(listing.target.cash)}}</td>
+          <td>{{listing.available}}</td>
         </tr>
       </tbody>
     </table>
@@ -74,15 +72,6 @@
         </div>
       </div>
       <!-- end min investment -->
-
-      <!-- hold period -->
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Hold Period (Years): </label>
-       <div class="col-sm-4">
-          <input type="text" class="form-control" placeholder="Enter No. of Years" ng-model="vm.info.hold">
-        </div>
-      </div>
-      <!-- end hold period -->
 
       <!-- IRR -->
       <div class="form-group">

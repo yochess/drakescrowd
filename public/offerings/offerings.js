@@ -14,17 +14,13 @@
 
       const displayOfferings = () => {
         Main.fetchOfferings()
-          .then(offerings => {
-            vm.offerings = offerings;
-          });
+          .then(offerings => {vm.offerings = offerings});
       };
 
       const displayOffering = () => {
         Main.fetchOffering(vm.id)
-          .then(offering => {
-            vm.offering = offering;
-          });
-      }
+          .then(offering => {vm.offering = offering});
+      };
 
       vm.toPercent = (num) => `${num * 100}%`;
 
