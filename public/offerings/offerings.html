@@ -1,50 +1,110 @@
 <div class="offerings" ng-show="!vm.id">
 
-  <!-- row -->
-  <div class="row">
+  <!-- available offers -->
+  <div class="offerings-view"></div>
+    <h2>Available Offers</h2>
 
-    <!-- col and ng-repeat -->
-    <div class="col-md-4" ng-repeat="offering in vm.offerings">
+    <!-- row -->
+    <div class="row">
 
-      <!-- offering head -->
-      <div class="offering-head">
-        <h4 class="text-center">{{offering.name}}</h4>
-        <h5 class="text-center">by {{offering.company}}</h5>
+      <!-- col and ng-repeat -->
+      <div class="col-md-4" ng-repeat="offering in vm.offerings" ng-if="offering.available">
+
+        <!-- offering head -->
+        <div class="offering-head">
+          <h4 class="text-center">{{offering.name}}</h4>
+          <h5 class="text-center">by {{offering.company}}</h5>
+        </div>
+        <!-- end offering head -->
+
+        <!-- image c-->
+        <div class="image-container img-responsive" alt="Responsive image">
+          <a ui-sref="offeringDetail({id: offering.id})"><img src="{{offering.img}}"></img></a>
+        </div>
+        <!-- end image -->
+
+        <!-- offering body -->
+        <div class="offering-body">
+          <div class="row">
+            <div class="col-sm-7 text-right">Investment Type: </div>
+            <div class="col-sm-5 text-right">{{offering.type}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 text-right">Min. Investment: </div>
+            <div class="col-sm-5 text-right">{{offering.min | currency}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 text-right">Target Return (IRR): </div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.irr)}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 text-right">Target Annual Cash</div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.cash)}}</div>
+          </div>
+        </div>
+        <!-- end offering body -->
+
       </div>
-      <!-- end offering head -->
-
-      <!-- image c-->
-      <div class="image-container img-responsive" alt="Responsive image">
-        <a ui-sref="offeringDetail({id: offering.id})"><img src="{{offering.img}}"></img></a>
-      </div>
-      <!-- end image -->
-
-      <!-- offering body -->
-      <div class="offering-body">
-        <div class="row">
-          <div class="col-sm-7 text-right">Investment Type: </div>
-          <div class="col-sm-5 text-right">{{offering.type}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-7 text-right">Min. Investment: </div>
-          <div class="col-sm-5 text-right">{{offering.min | currency}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-7 text-right">Target Return (IRR): </div>
-          <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.irr)}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-7 text-right">Target Annual Cash</div>
-          <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.cash)}}</div>
-        </div>
-      </div>
-      <!-- end offering body -->
+      <!-- end col and ng-repeat -->
 
     </div>
-    <!-- end col and ng-repeat -->
+    <!-- end row -->
 
   </div>
-  <!-- end row -->
+  <!-- end available offers -->
+
+  <!-- NOT available offers -->
+  <div class="offerings-view"></div>
+    <h2>SOLD OUT</h2>
+
+    <!-- row -->
+    <div class="row">
+
+      <!-- col and ng-repeat -->
+      <div class="col-md-4" ng-repeat="offering in vm.offerings" ng-if="!offering.available">
+
+        <!-- offering head -->
+        <div class="offering-head">
+          <h4 class="text-center">{{offering.name}}</h4>
+          <h5 class="text-center">by {{offering.company}}</h5>
+        </div>
+        <!-- end offering head -->
+
+        <!-- image c-->
+        <div class="image-container img-responsive" alt="Responsive image">
+          <a ui-sref="offeringDetail({id: offering.id})"><img src="{{offering.img}}"></img></a>
+        </div>
+        <!-- end image -->
+
+        <!-- offering body -->
+        <div class="offering-body">
+          <div class="row">
+            <div class="col-sm-7 text-right">Investment Type: </div>
+            <div class="col-sm-5 text-right">{{offering.type}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 text-right">Min. Investment: </div>
+            <div class="col-sm-5 text-right">{{offering.min | currency}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 text-right">Target Return (IRR): </div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.irr)}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 text-right">Target Annual Cash</div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.cash)}}</div>
+          </div>
+        </div>
+        <!-- end offering body -->
+
+      </div>
+      <!-- end col and ng-repeat -->
+
+    </div>
+    <!-- end row -->
+
+  </div>
+  <!-- end NOT available offers -->
 
 </div>
 

@@ -1,14 +1,11 @@
-.listing-view, .portfolio-view {
+.view {
   margin-top: 100px;
-  margin-bottom: 50px;
 }
 
-.listing-form {
-  /*margin-left: 50px;*/
-  margin-top: 50px;
-  margin-bottom: 100px;
+.listings-form {
+  margin-top: 100px;
 }
 
-.offering-head {
-
+.footer {
+  margin-top: 100px;
 }
