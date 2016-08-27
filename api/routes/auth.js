@@ -1,13 +1,11 @@
 'use strict';
 import express from 'express';
+import Auth from '../controllers/auth.js'
+
 const authRouter = express.Router();
 
 authRouter
-  .post('/investor/login', () => {})
-  .post('/investor/signup', () => {});
-
-authRouter
-  .post('/company/login', () => {})
-  .post('/company/signup', () => {})
+  .post('/login', Auth.login)
+  .post('/signup', Auth.signup);
 
 export default authRouter;

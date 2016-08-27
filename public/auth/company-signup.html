@@ -1,0 +1,15 @@
+<!-- taken from boostrap: http://getbootstrap.com/examples/signin/ -->
+
+<form class="form-signin" ng-submit="vm.signup('company')">
+  <h2 class="form-signin-heading">Register a Company Account</h2>
+  <label>Username: </label>
+  <input type="text" class="form-control class="sr-only" placeholder="Username" required autofocus ng-model="vm.auth.username">
+  <label>Password</label>
+  <input type="password" class="form-control" placeholder="Password" required ng-model="vm.auth.password">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+</form>

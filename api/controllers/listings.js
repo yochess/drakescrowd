@@ -47,7 +47,7 @@ const fetchListing = (req, res) => {
       .filter(investment => {
         return investment.propertyId === property.id &&
           investment.pending === true;
-      })
+    })
   };
 
   return res.send(data);

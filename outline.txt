@@ -7,5 +7,10 @@
   - company should not be able to edit listing once created
   - company can get info on all listings (get /listings)
   - company can get info on single listing + investors (get /listings/:id)
-  - company decides when to close investment (post /listings/listing/:id)
-  - company can approve or reject a customer (post /listings/listing/:id)
+  - company decides when to close investment (post /listings/:id)
+  - company can approve or reject a customer (post /listings/:id)
+
+external sources:
+1. bootstrap
+2. passport docs
+3. http://mherman.org/blog/2015/07/02/handling-user-authentication-with-the-mean-stack/
