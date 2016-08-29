@@ -47,8 +47,7 @@
           templateUrl: './offerings/offering.html',
           controller: 'offeringsCtrl',
           controllerAs: 'vm',
-          access: {
-            restricted: (Auth) => Auth.getUserTypeSync() !== 'investor'}
+          access: {restricted: () => false}
         })
         .when('/listings', {
           url: '/listings',

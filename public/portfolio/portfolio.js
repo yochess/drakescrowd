@@ -4,10 +4,13 @@
   angular.module('drakesCrowd')
   .controller('portfolioCtrl', [
     'Main',
-    function(Main) {
+    '$routeParams',
+    function(Main, $routeParams) {
       const vm = this;
 
-      vm.offerings = Main.offerings;
+      vm.portfolio = [];
+      vm.investment = null;
+      vm.id = +$routeParams.id;
 
       vm.sortConditions = {
         name: null,
@@ -33,10 +36,14 @@
           }
         });
         vm.sortConditions[type] = !vm.sortConditions[type];
-
       };
 
+      vm.getInvestments = () => {
+        Main.fetchPortfolio()
+        .then(investments => {vm.portfolio = investments});
+      };
 
+      vm.getInvestments();
     }]);
 
 })();

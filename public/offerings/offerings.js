@@ -6,7 +6,8 @@
     'Main',
     '$routeParams',
     '$location',
-    function(Main, $routeParams, $location) {
+    'Auth',
+    function(Main, $routeParams, $location, Auth) {
       const vm = this;
 
       vm.id = +$routeParams.id;
@@ -33,6 +34,8 @@
         Main.makeInvestment(vm.info)
           .then(investment => { $location.path('/portfolio') });
       };
+
+      vm.isInvestor = () => Auth.getUserTypeSync();
 
     }]);
 

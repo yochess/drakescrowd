@@ -19,12 +19,9 @@ apiRouter
   .put('/listings/:id', isAuth('company'), listingsCtrl.editListing);
 
 apiRouter
+  .get('/investments', isAuth('investor'), investmentsCtrl.fetchInvestments)
   .post('/investments', isAuth('investor'), investmentsCtrl.makeInvestment);
 
-apiRouter
-  .get('/portfolio', (req, res) => {
-    // fetch current investments (only available to investor)
-  });
 
 export default apiRouter;
 

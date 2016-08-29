@@ -22,8 +22,8 @@
       <div class="row">
         <div class="col-sm-7">Min. Investment: </div>
         <div class="col-sm-5">{{vm.offering.min | currency}}</div>
-        <div class="col-sm-7">Shares Available (in dollars)</div>
-        <div class="col-sm-5">{{vm.offering.available | currency}}</div>
+        <div class="col-sm-7">Max Investment: </div>
+        <div class="col-sm-5">{{vm.offering.shares | currency}}</div>
       </div>
       <div class="row">
         <div class="col-sm-7">Target Return (IRR): </div>
@@ -44,7 +44,7 @@
     <!-- end additional details -->
 
     <!-- Investment offer -->
-    <div class="offering-form">
+    <div class="offering-form" ng-show="vm.isInvestor()">
       <h4>Would you like to invest?</h4>
       <form class="form-horizontal" ng-submit="vm.submit()">
 

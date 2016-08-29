@@ -10,7 +10,6 @@ const fetchOfferings = (req, res) => {
 };
 
 const fetchOffering = (req, res) => {
-  const investorId = req.session.passport.user.slice(8);
   const propertyId = +req.params.id;
 
   db.Property.findOne({

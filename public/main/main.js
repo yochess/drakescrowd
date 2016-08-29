@@ -25,7 +25,13 @@
       return $http
         .post('/api/investments', data)
         .then(res => res.data);
-    }
+    };
+
+    const fetchPortfolio = () => {
+      return $http
+        .get('/api/investments')
+        .then(res => res.data);
+    };
 
     const fetchListings = () => {
       return $http
@@ -50,6 +56,7 @@
       fetchOfferings,
       fetchOffering,
       makeInvestment,
+      fetchPortfolio,
       fetchListings,
       fetchListing,
       makeListing

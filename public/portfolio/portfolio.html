@@ -2,27 +2,35 @@
 
   <div class="portfolio-view">
     <h4>My Portfolio</h4>
+    {{vm.portfolio}}
     <table class="table">
       <thead>
         <tr>
           <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('name')"></span></td>
           <td>Company</td>
           <td>Type</td>
-          <td>Min. Investment<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('min')"></span></td>
-          <td>Hold Period</td>
+          <td>Market Price<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('marketprice')"></span></td>
           <td>Target Return</td>
           <td>Target Annual Cash</td>
+          <td>Investment Amount</td>
+          <td>Approved</td>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="offering in vm.offerings">
-          <td>{{offering.name}}</td>
-          <td>{{offering.company}}</td>
-          <td>{{offering.type}}</td>
-          <td>{{offering.min | currency}}</td>
-          <td>{{offering.hold}}</td>
-          <td>{{vm.toPercent(offering.target.irr)}}</td>
-          <td>{{vm.toPercent(offering.target.cash)}}</td>
+        <tr ng-repeat="investment in vm.portfolio">
+          <td>
+            <a href="#/offerings/{{investment.property.id}}">{{investment.property.name}}</a>
+          </td>
+          <td>{{investment.property.company.username}}</td>
+          <td>{{investment.property.type}}</td>
+          <td>{{investment.property.marketprice | currency}}</td>
+          <td>{{vm.toPercent(investment.property.irr)}}</td>
+          <td>{{vm.toPercent(investment.property.cash)}}</td>
+          <td>{{investment.amount}}</td>
+          <td>
+            <span ng-if="investment.pending">PENDING</span>
+            <span ng-if="investment.approved">APPROVED</span>
+          </td>
         </tr>
       </tbody>
     </table>
