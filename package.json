@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel-node": "babel-node --presets=es2015 --ignore='foo|bar|baz'",
+    "babel-node": "babel-node --presets=es2015 --ignore='node_modules'",
     "start": "nodemon --exec npm run babel-node -- app.js"
   },
   "repository": {
