@@ -4,10 +4,12 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
+// import sessionFileStore from 'session-file-store';
 import authRouter from './api/routes/auth.js';
 import apiRouter from './api/routes/api.js';
 
 const app = express();
+// const FileStore = sessionFileStore(session);
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -15,8 +17,9 @@ app.use(bodyParser.json());
 
 app.use(session({
   secret: process.env.SECRET || 'asdf',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true,
+  // store: new FileStore(),
 }));
 
 app.use(passport.initialize());
