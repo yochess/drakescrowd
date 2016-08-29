@@ -1,6 +1,8 @@
-1) Offering API
+1) Offerings API
   - display info on all offerings
   - display info on specific offering
+  - post investment on specific offering
+
 
 2) Company API
   - company can create new listing (post /listings)
@@ -9,6 +11,7 @@
   - company can get info on single listing + investors (get /listings/:id)
   - company decides when to close investment (post /listings/:id)
   - company can approve or reject a customer (post /listings/:id)
+
 
 external sources:
 1. bootstrap

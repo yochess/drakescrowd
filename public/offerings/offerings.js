@@ -8,9 +8,10 @@
     function(Main, $routeParams) {
       const vm = this;
 
+      vm.id = +$routeParams.id;
       vm.offerings = [];
       vm.offering = null;
-      vm.id = +$routeParams.id;
+      vm.info = {};
 
       const displayOfferings = () => {
         Main.fetchOfferings()
@@ -25,6 +26,11 @@
       vm.toPercent = (num) => `${num * 100}%`;
 
       vm.id ? displayOffering() : displayOfferings();
+
+      vm.submit = () => {
+
+      };
+
     }]);
 
 })();
