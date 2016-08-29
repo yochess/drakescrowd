@@ -63,10 +63,34 @@ const makeListing = (req, res) => {
 };
 
 const editListing = (req, res) => {
+  const companyId = req.session.passport.user.slice(7);
+  const propertyId = req.params.id;
+  db.Property.findOne({
+    where: {
+      id: propertyId,
+      companyId: companyId
+    }
+  })
+  .then(property => {
+    const shares = req.body.shares === undefined ? property.shares : req.body.shares;
+    const min = req.body.min === undefined ? property.min : req.body.min;
+    const available = req.body.available === undefined ? 0 : 1;
+
+    property.updateAttributes({
+      available: available,
+      shares: shares,
+      min: min
+    })
+    .then(() => {
+      res.status(201).send('done!');
+    });
+  });
+};
+
+const acceptInvestment = (req, res) => {
   const companyId = +req.session.passport.user.slice(7);
   const propertyId = +req.body.investment.propertyId;
   const investmentId = +req.body.investment.id;
-
   db.Property.findOne({
     where: {
       id: propertyId,
@@ -102,5 +126,6 @@ export default {
   fetchListings,
   fetchListing,
   makeListing,
-  editListing
+  editListing,
+  acceptInvestment
 };

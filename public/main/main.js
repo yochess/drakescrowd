@@ -51,11 +51,21 @@
         .then(res => res.data);
     };
 
-    const editListing = (id, investment, accept) => {
+    const editListing = (id, available, shares, min) => {
       return $http
         .put(`/api/listings/${id}`, {
+          available: available,
+          shares: shares,
+          min: min
+        })
+        .then(res => res.data);
+    }
+
+    const acceptInvestment = (id, investment, accept) => {
+      return $http
+        .put('/api/investments/accept', {
           investment: investment,
-          accept:accept
+          accept: accept
         })
         .then(res => res.data);
     };
@@ -68,7 +78,8 @@
       fetchListings,
       fetchListing,
       makeListing,
-      editListing
+      editListing,
+      acceptInvestment
     };
 
   }]);

@@ -31,7 +31,6 @@ const login = (req, res, next) => {
   req.session.userType = req.body.userType;
 
   passport.authenticate('local-login', (err, proceed, info) => {
-    console.log(err);
     if (err) {
       return res.status(500).send('Internal Error');
     }

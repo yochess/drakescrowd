@@ -1,5 +1,20 @@
 <div ng-show="vm.id" class="listingDetail">
 
+<div class="show-listing">
+  Listing Availability: {{vm.listing.available}}
+</div>
+
+  <div class="edit-listing">
+    <h4>Edit Details</h4>
+
+    <form ng-submit="vm.editListing(vm.available, vm.shares, vm.min)">
+      Available: <input name="name" type="checkbox" ng-model="vm.available">
+      Shares remaining (in dollars): <input type="text" ng-model="vm.shares">
+      Min Investment (in dollars): <input type="text" ng-model="vm.min">
+      <button type="submit">Edit</button>
+    </form>
+  </div>
+
   <div class="pending-investor">
     <h4>Pending Investors</h4>
     <table class="table">

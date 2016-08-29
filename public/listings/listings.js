@@ -62,11 +62,19 @@
           })
       };
 
+      vm.editListing = (available, shares, min) => {
+        Main.editListing(vm.id, available, shares, min)
+          .then(res => {displayListing()});
+      };
+
       vm.process = (investment, accept) => {
-        Main.editListing(vm.id, investment, accept)
-          .then(res => {
-            displayListing();
-          });
+        Main.acceptInvestment(vm.id, investment, accept)
+        .then(res => {
+          delete vm.min;
+          delete vm.shares;
+          delete vm.available;
+          displayListing();
+        });
       };
 
     }]);

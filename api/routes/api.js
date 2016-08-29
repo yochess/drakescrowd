@@ -20,7 +20,8 @@ apiRouter
 
 apiRouter
   .get('/investments', isAuth('investor'), investmentsCtrl.fetchInvestments)
-  .post('/investments', isAuth('investor'), investmentsCtrl.makeInvestment);
+  .post('/investments', isAuth('investor'), investmentsCtrl.makeInvestment)
+  .put('/investments/accept', isAuth('company'), listingsCtrl.acceptInvestment);
 
 
 export default apiRouter;
