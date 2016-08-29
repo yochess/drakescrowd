@@ -4,6 +4,8 @@ prereq:
   - make sure mysql is installed and running.
   - make sure node is installed.
   
+  
+  
 1. clone this repo
 2. cd into the repo
 3. run $ npm install
@@ -13,3 +15,7 @@ prereq:
   - SQL_DB = your mysql database (by default the name will be 'drakescrowd')
 5. create the database in mysql
 6. run $ npm start
+  
+  
+  
+If you like to populate table with sample data, run $ babel-node sampledata.js
