@@ -91,6 +91,8 @@ const acceptInvestment = (req, res) => {
   const companyId = +req.session.passport.user.slice(7);
   const propertyId = +req.body.investment.propertyId;
   const investmentId = +req.body.investment.id;
+  const approved = +req.body.accept;
+
   db.Property.findOne({
     where: {
       id: propertyId,
@@ -106,11 +108,11 @@ const acceptInvestment = (req, res) => {
     .then(investment => {
       investment.updateAttributes({
         pending: 0,
-        approved: +req.body.accept
+        approved: approved
       })
       .then(() => {
         property.updateAttributes({
-          shares: property.shares - investment.amount
+          shares: property.shares - (approved === 1 ? investment.amount : 0)
         })
         .then(() => {
           return res.status(201).send('Updated!')
