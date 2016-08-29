@@ -5,7 +5,8 @@
   .controller('offeringsCtrl', [
     'Main',
     '$routeParams',
-    function(Main, $routeParams) {
+    '$location',
+    function(Main, $routeParams, $location) {
       const vm = this;
 
       vm.id = +$routeParams.id;
@@ -28,7 +29,9 @@
       vm.id ? displayOffering() : displayOfferings();
 
       vm.submit = () => {
-
+        vm.info.id = vm.id;
+        Main.makeInvestment(vm.info)
+          .then(investment => { $location.path('/portfolio') });
       };
 
     }]);

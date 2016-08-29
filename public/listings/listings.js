@@ -55,7 +55,11 @@
       };
 
       vm.submit = () => {
-        console.log(vm.info);
+        Main.makeListing(vm.info)
+          .then(data => {
+            displayListings();
+            vm.info = {};
+          })
       };
 
     }]);

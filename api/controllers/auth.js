@@ -31,6 +31,7 @@ const login = (req, res, next) => {
   req.session.userType = req.body.userType;
 
   passport.authenticate('local-login', (err, proceed, info) => {
+    console.log(err);
     if (err) {
       return res.status(500).send('Internal Error');
     }
@@ -57,11 +58,26 @@ const userType = (req, res) => {
   }
   const userType = req.session.passport.user.slice(0,8) === 'investor' ? 'investor' : 'company';
   return res.status(200).send(userType);
-}
+};
+
+const checkAuthMW = (type) => {
+  return (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return res.redirect('/');
+    }
+    const userType = req.session.passport.user.slice(0,8) === 'investor' ? 'investor' : 'company';
+
+    if (!(type === userType)) {
+      return res.redirect('/');
+    }
+    return next();
+  }
+};
 
 export default {
   login,
   signup,
   logout,
-  userType
+  userType,
+  checkAuthMW
 };

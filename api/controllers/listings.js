@@ -1,64 +1,77 @@
 'use strict';
-import data from './data.js';
-
-const Properties = data.properties;
-const Companies = data.companies;
-const Investments = data.investments;
+import db from '../utils/dbconfig.js';
 
 const fetchListings = (req, res) => {
-  const data = Properties.map(property => {
-    return {
-      id: property.id,
-      name: property.name,
-      type: property.type,
-      min: property.min,
-      target: {
-        irr: property.target.irr,
-        cash: property.target.cash
-      },
-      available: property.available
-    };
-  });
+  const companyId = +req.session.passport.user.slice(7);
 
-  return res.send(data);
+  db.Property.findAll({
+    where: {companyId: companyId},
+    include: [{model: db.Company}]
+  })
+  .then(properties => {
+    return res.send(properties);
+  });
 };
 
 const fetchListing = (req, res) => {
-  const id = +req.params.id;
-  const property = Properties[id-1];
-  const data = {
-    id: property.id,
-    name: property.name,
-    img: property.img,
-    type: property.type,
-    min: property.min,
-    target: {
-      irr: property.target.irr,
-      cash: property.target.cash
-    },
-    marketPrice: property.marketPrice,
-    available: property.available,
-    investors: Investments.filter(investment => {
-      return investment.propertyId === property.id &&
-        investment.pending === false &&
-        investment.approved === true;
-    }),
-    pending: Investments
-      .filter(investment => {
-        return investment.propertyId === property.id &&
-          investment.pending === true;
-    })
-  };
+  const propertyId = +req.params.id;
 
-  return res.send(data);
+  db.Property.findOne({
+    where: {id: propertyId},
+    include: [
+      {model: db.Company},
+      {model: db.Investment, include: [{model: db.Investor}]}
+    ]
+  })
+  .then(property => {
+    return res.send(property);
+  })
 };
 
-const createNewListing = (req, res) => {
-  // post new listing
+const makeListing = (req, res) => {
+  const companyId = +req.session.passport.user.slice(7);
+
+  db.Property.create({
+    name: req.body.name,
+    img: req.body.img,
+    type: req.body.type,
+    min: req.body.min,
+    irr: req.body.irr / 100,
+    cash: req.body.cash / 100,
+    marketprice: req.body.marketprice,
+    shares: req.body.shares,
+    available: req.body.available,
+    additionaldetails: req.body.additionaldetails,
+    companyId: companyId
+  })
+  .then(result => {
+    return res.status(201).send('Created!');
+  });
 };
+
+const editListing = (req, res) => {
+  const propertyId = +req.params.id;
+
+  db.Property.find({
+    where: {id: propertyId},
+    include: [{
+      model: db.Company,
+    }, {
+      model: db.Investment,
+    }, {
+      model: db.Investor,
+      exclude: ['password']
+    }]
+  })
+  .then(property => {
+    console.log(property);
+    res.send(property);
+  });
+}
 
 export default {
   fetchListings,
   fetchListing,
-  createNewListing
+  makeListing,
+  editListing
 };

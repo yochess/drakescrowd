@@ -1,5 +1,10 @@
 <div ng-show="vm.id" class="listingDetail">
 
-{{vm.listing}}
+  <div class="investor-wrapper">
+    <h4>Pending Investors</h4>
+    <div ng-repeat="investor in vm.listing">
+      {{investor}}
+    </div>
+  </div>
 
 </div>

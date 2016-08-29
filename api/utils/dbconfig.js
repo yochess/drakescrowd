@@ -22,7 +22,8 @@ const Property = sequelize.define('property', {
   min: Sequelize.FLOAT,
   irr: Sequelize.FLOAT,
   cash: Sequelize.FLOAT,
-  marketPrice: Sequelize.FLOAT,
+  marketprice: Sequelize.FLOAT,
+  shares: Sequelize.FLOAT,
   available: {type: Sequelize.BOOLEAN, defaultValue: true},
   additionaldetails: Sequelize.STRING
 });
@@ -43,7 +44,9 @@ Investor.hasMany(Investment);
 
 sequelize.sync();
 
-export {
+export default {
   Investor,
-  Company
+  Company,
+  Property,
+  Investment
 }

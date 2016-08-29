@@ -2,17 +2,17 @@
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { Investor, Company } from '../utils/dbconfig.js';
+import db from '../utils/dbconfig.js';
 
 passport.serializeUser((user, done) => {
-  const type = user instanceof Investor.Instance ? 'investor' : 'company';
+  const type = user instanceof db.Investor.Instance ? 'investor' : 'company';
 
   done(null, type + user.id);
 });
 
 passport.deserializeUser((typeAndId, done) => {
   const type = typeAndId.slice(0,8);
-  const user = type === 'investor' ? Investor : Company;
+  const user = type === 'investor' ? db.Investor : db.Company;
   const id = type === 'investor' ? typeAndId.slice(8) : typeAndId.slice(7);
 
   user.findById(id)
@@ -23,7 +23,7 @@ passport.deserializeUser((typeAndId, done) => {
 passport.use('local-signup', new LocalStrategy(
   {passReqToCallback: true},
   (req, username, password, done) => {
-    const user = req.session.userType === 'investor' ? Investor : Company;
+    const user = req.session.userType === 'investor' ? db.Investor : db.Company;
     const info = req.session.userType === 'investor' ? 'investor' : 'company';
 
     user.findOne({where: {username}}).then(userExists => {
@@ -44,7 +44,7 @@ passport.use('local-signup', new LocalStrategy(
 passport.use('local-login', new LocalStrategy(
   {passReqToCallback: true},
   (req, username, password, done) => {
-    const user = req.session.userType === 'investor' ? Investor : Company;
+    const user = req.session.userType === 'investor' ? db.Investor : db.Company;
     const info = req.session.userType === 'investor' ? 'investor' : 'company';
 
     user.findOne({where: {username}}).then(user => {

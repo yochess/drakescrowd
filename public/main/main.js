@@ -21,6 +21,12 @@
         .then(res => res.data);
     };
 
+    const makeInvestment = (data) => {
+      return $http
+        .post('/api/investments', data)
+        .then(res => res.data);
+    }
+
     const fetchListings = () => {
       return $http
         .get('/api/listings')
@@ -31,13 +37,22 @@
       return $http
         .get(`/api/listings/${id}`)
         .then(res => res.data);
-    }
+    };
+
+    const makeListing = (data) => {
+      console.log(data);
+      return $http
+        .post('/api/listings', data)
+        .then(res => res.data);
+    };
 
     return {
       fetchOfferings,
       fetchOffering,
+      makeInvestment,
       fetchListings,
-      fetchListing
+      fetchListing,
+      makeListing
     }
 
   }]);

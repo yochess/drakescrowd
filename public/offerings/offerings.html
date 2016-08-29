@@ -13,7 +13,7 @@
         <!-- offering head -->
         <div class="offering-head">
           <h4 class="text-center">{{offering.name}}</h4>
-          <h5 class="text-center">by {{offering.company}}</h5>
+          <h5 class="text-center">by {{offering.company.username}}</h5>
         </div>
         <!-- end offering head -->
 
@@ -35,11 +35,11 @@
           </div>
           <div class="row">
             <div class="col-sm-7 text-right">Target Return (IRR): </div>
-            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.irr)}}</div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.irr)}}</div>
           </div>
           <div class="row">
             <div class="col-sm-7 text-right">Target Annual Cash</div>
-            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.cash)}}</div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.cash)}}</div>
           </div>
         </div>
         <!-- end offering body -->
@@ -66,7 +66,7 @@
         <!-- offering head -->
         <div class="offering-head">
           <h4 class="text-center">{{offering.name}}</h4>
-          <h5 class="text-center">by {{offering.company}}</h5>
+          <h5 class="text-center">by {{offering.company.company}}</h5>
         </div>
         <!-- end offering head -->
 
@@ -88,11 +88,11 @@
           </div>
           <div class="row">
             <div class="col-sm-7 text-right">Target Return (IRR): </div>
-            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.irr)}}</div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.irr)}}</div>
           </div>
           <div class="row">
             <div class="col-sm-7 text-right">Target Annual Cash</div>
-            <div class="col-sm-5 text-right">{{vm.toPercent(offering.target.cash)}}</div>
+            <div class="col-sm-5 text-right">{{vm.toPercent(offering.cash)}}</div>
           </div>
         </div>
         <!-- end offering body -->

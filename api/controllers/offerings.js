@@ -1,60 +1,29 @@
 'use strict';
-import data from './data.js';
-
-const Properties = data.properties;
-const Companies = data.companies;
-const Investments = data.investments;
+import db from '../utils/dbconfig.js';
 
 const fetchOfferings = (req, res) => {
-
-  const data = Properties.map(property => {
-    return {
-      id: property.id,
-      name: property.name,
-      img: property.img,
-      type: property.type,
-      min: property.min,
-      target: {
-        irr: property.target.irr,
-        cash: property.target.cash
-      },
-      marketPrice: property.marketPrice,
-      available: property.available,
-      company: Companies[property.companyId-1].name
-    };
-  })
-
-  return res.send(data);
+  db.Property.findAll({include: [{
+    model: db.Company,
+    attributes: {exclude: ['password']}
+  }]})
+  .then(properties => res.send(properties));
 };
 
 const fetchOffering = (req, res) => {
-  const id = +req.params.id;
-  const property = Properties[id-1];
-  const data = {
-    id: property.id,
-    name: property.name,
-    img: property.img,
-    type: property.type,
-    min: property.min,
-    target: {
-      irr: property.target.irr,
-      cash: property.target.cash
-    },
-    marketPrice: property.marketPrice,
-    available: property.available,
-    company: Companies[property.companyId-1].name,
-    additionalDetails: property.additionalDetails
-  };
+  const investorId = req.session.passport.user.slice(8);
+  const propertyId = +req.params.id;
 
-  return res.send(data);
-};
-
-const postOffering = (req, res) => {
-
+  db.Property.findOne({
+    where: {id: propertyId},
+    include: {
+      model: db.Company,
+      attributes: {exclude: ['password']}
+    }
+  })
+  .then(property => res.send(property));
 };
 
 export default {
   fetchOfferings,
-  fetchOffering,
-  postOffering
+  fetchOffering
 };

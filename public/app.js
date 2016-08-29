@@ -71,18 +71,6 @@
         });
   }])
 
-  // this is super hacky (got into a huge rabbit hole b/c of ui-router)
-  // app.run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
-  //   $rootScope.$on('$stateChangeStart',
-  //     function(event, toState, toParams, fromState, fromParams, options){
-  //       Auth.getUserTypeAsync().then(() => {
-  //         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
-  //           $state.go('home');
-  //         });
-  //       });
-
-  //   })
-
   app.run([
     '$rootScope',
     '$location',
@@ -98,9 +86,5 @@
       });
     });
   }]);
-
-
-  // }]);
-
 
 })();

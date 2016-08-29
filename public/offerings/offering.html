@@ -1,11 +1,8 @@
 <div ng-show="vm.id" class="offeringDetail">
 
-<p>Do something with all this stuff</p>
-{{vm.offering}}
-
 <div class="row">
   <h2>{{vm.offering.name}}</h2>
-  <h4>by {{vm.offering.company}}</h4>
+  <h4>by {{vm.offering.company.username}}</h4>
 
   <div class="col-md-7">
     <!-- image c-->
@@ -20,19 +17,21 @@
     <div class="offering-body">
       <div class="row">
         <div class="col-sm-7">Investment Type: </div>
-        <div class="col-sm-5">{{offering.type}}</div>
+        <div class="col-sm-5">{{vm.offering.type}}</div>
       </div>
       <div class="row">
         <div class="col-sm-7">Min. Investment: </div>
-        <div class="col-sm-5">{{offering.min | currency}}</div>
+        <div class="col-sm-5">{{vm.offering.min | currency}}</div>
+        <div class="col-sm-7">Shares Available (in dollars)</div>
+        <div class="col-sm-5">{{vm.offering.available | currency}}</div>
       </div>
       <div class="row">
         <div class="col-sm-7">Target Return (IRR): </div>
-        <div class="col-sm-5">{{vm.toPercent(vm.offering.target.irr)}}</div>
+        <div class="col-sm-5">{{vm.toPercent(vm.offering.irr)}}</div>
       </div>
       <div class="row">
         <div class="col-sm-7">Target Annual Cash</div>
-        <div class="col-sm-5">{{vm.toPercent(vm.offering.target.cash)}}</div>
+        <div class="col-sm-5">{{vm.toPercent(vm.offering.cash)}}</div>
       </div>
     </div>
     <!-- end details -->
@@ -40,7 +39,7 @@
     <!-- additional details -->
     <div class="additional-details">
       <h4>Additional Details</h4>
-      <p>{{vm.offering.additionalDetails}}</p>
+      <p>{{vm.offering.additionaldetails}}</p>
     </div>
     <!-- end additional details -->
 

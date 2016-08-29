@@ -11,7 +11,6 @@
           <td>Min. Investment<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('min')"></span></td>
           <td>Target Return</td>
           <td>Target Annual Cash</td>
-          <td>Available</td>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +18,8 @@
           <td><a href="#/listings/{{listing.id}}">{{listing.name}}</a></td>
           <td>{{listing.type}}</td>
           <td>{{listing.min | currency}}</td>
-          <td>{{vm.toPercent(listing.target.irr)}}</td>
-          <td>{{vm.toPercent(listing.target.cash)}}</td>
-          <td>{{listing.available}}</td>
+          <td>{{vm.toPercent(listing.irr)}}</td>
+          <td>{{vm.toPercent(listing.cash)}}</td>
         </tr>
       </tbody>
     </table>
@@ -46,7 +44,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Image Upload: </label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" placeholder="UNDER CONSTRUCTION" ng-model="vm.info.img">
+          <input type="text" class="form-control" placeholder="Enter IMG ADDRESS" ng-model="vm.info.img">
         </div>
       </div>
       <!-- end input upload -->
@@ -78,7 +76,7 @@
         <label class="col-sm-2 control-label">Target IRR: </label>
         <div class="col-sm-4">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.target.irr">
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.irr">
             <div class="input-group-addon">%</div>
           </div>
         </div>
@@ -90,12 +88,49 @@
         <label class="col-sm-2 control-label">Target Cash: </label>
         <div class="col-sm-4">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.target.cash">
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.cash">
             <div class="input-group-addon">%</div>
           </div>
         </div>
       </div>
       <!-- end cash flow -->
+
+      <!-- available $$ -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Shares Available (in dollars): </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon" ng-model="vm.info.shares">$</div>
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.shares">
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <!-- end cash flow -->
+
+      <!--market price -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">House Value: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" placeholder="Enter Value" ng-model="vm.info.marketprice">
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <!-- end IRR -->
+
+      <!-- additional description -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Additional Description: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <textarea class="form-control" rows="5" placeholder="Enter Description" ng-model="vm.info.additionaldetails"></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- end additional details -->
 
       <!-- button -->
       <div class="col-sm-2 text-center">
