@@ -26,17 +26,17 @@
 
       vm.editListing = (available, shares, min) => {
         Main.editListing(vm.id, available, shares, min)
-          .then(res => {displayListing()});
+          .then(res => {
+            delete vm.min;
+            delete vm.shares;
+            delete vm.available;
+            displayListing()
+          });
       };
 
       vm.acceptInvestment = (investment, accept) => {
         Main.acceptInvestment(vm.id, investment, accept)
-        .then(res => {
-          delete vm.min;
-          delete vm.shares;
-          delete vm.available;
-          displayListing();
-        });
+        .then(res => {displayListing()});
       };
 
       vm.sortConditions = {
