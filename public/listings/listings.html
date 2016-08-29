@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="listing in vm.listings">
-          <td><a href="#/listings/{{listing.id}}">{{listing.name}}</a></td>
+          <td><a href="/listings/{{listing.id}}">{{listing.name}}</a></td>
           <td>{{listing.type}}</td>
           <td>{{listing.min | currency}}</td>
           <td>{{vm.toPercent(listing.irr)}}</td>

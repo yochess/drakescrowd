@@ -5,7 +5,8 @@
 
   app.config([
     '$routeProvider',
-    function($routeProvider) {
+    '$locationProvider',
+    function($routeProvider, $locationProvider) {
       $routeProvider
         .when('/home', {
           templateUrl: './home/home.html',
@@ -70,6 +71,8 @@
           redirectTo: '/home',
           access: {restricted: () => false}
         });
+
+      $locationProvider.html5Mode(true);
   }])
 
   app.run([
@@ -80,7 +83,7 @@
     function ($rootScope, $location, $route, Auth) {
     $rootScope.$on('$routeChangeStart', (event, next, current) => {
       Auth.getUserTypeAsync().then(() => {
-        if (next.access.restricted(Auth)) {
+        if (next.access && next.access.restricted(Auth)) {
           $location.path('/home');
           $route.reload();
         }
