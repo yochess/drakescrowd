@@ -19,20 +19,20 @@
           controllerAs: 'vm',
           access: {restricted: () => false}
         })
-        .when('/company-signup', {
+        .when('/company/signup', {
           templateUrl: './auth/company-signup.html',
           controller: 'authCtrl',
           controllerAs: 'vm',
           access: {restricted: () => false}
         })
-        .when('/company-login', {
+        .when('/company/login', {
           templateUrl: './auth/company-login.html',
           controller: 'authCtrl',
           controllerAs: 'vm',
           access: {restricted: () => false}
         })
         .when('/home', {
-          templateUrl: './main/home.html',
+          templateUrl: './home/home.html',
           controller: 'mainCtrl',
           controllerAs: 'vm',
           access: {restricted: () => false}
