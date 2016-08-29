@@ -1,110 +1,106 @@
 (() => {
   'use strict';
 
-  const app = angular.module('drakesCrowd', ['ui.router'])
+  const app = angular.module('drakesCrowd', ['ngRoute'])
 
   app.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
-      $stateProvider
-        .state('signup', {
-          url: '/signup',
+    '$routeProvider',
+    function($routeProvider) {
+      $routeProvider
+        .when('/signup', {
           templateUrl: './auth/investor-signup.html',
           controller: 'authCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {restricted: () => false}
         })
-        .state('login', {
-          url: '/login',
+        .when('/login', {
           templateUrl: './auth/investor-login.html',
           controller: 'authCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {restricted: () => false}
         })
-        .state('company-signup', {
-          url: '/company/signup',
+        .when('/company-signup', {
           templateUrl: './auth/company-signup.html',
           controller: 'authCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {restricted: () => false}
         })
-        .state('company-login', {
-          url: '/company/login',
+        .when('/company-login', {
           templateUrl: './auth/company-login.html',
           controller: 'authCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {restricted: () => false}
         })
-        .state('home', {
-          url: '/home',
+        .when('/home', {
           templateUrl: './main/home.html',
           controller: 'mainCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {restricted: () => false}
         })
-        .state('offerings', {
-          url: '/offerings',
+        .when('/offerings', {
           templateUrl: './offerings/offerings.html',
           controller: 'offeringsCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {restricted: () => false}
         })
-        .state('offeringDetail', {
-          url: '/offerings/:id',
+        .when('/offerings/:id', {
           templateUrl: './offerings/offering.html',
           controller: 'offeringsCtrl',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          access: {
+            restricted: (Auth) => Auth.getUserTypeSync() !== 'investor'}
         })
-        .state('listings', {
+        .when('/listings', {
           url: '/listings',
           templateUrl: './listings/listings.html',
           controller: 'listingsCtrl',
           controllerAs: 'vm',
-          resolve: {
-            security: ['$q', 'Auth', function($q, Auth) {
-              if (Auth.getUserTypeSync() !== 'company'){
-                return $q.reject("Not Company");
-              }
-            }]
-          }
+          access: {restricted: (Auth) => Auth.getUserTypeSync() !== 'company'}
         })
-        .state('listingDetail', {
-          url: '/listings/:id',
+        .when('/listings/:id', {
           templateUrl: './listings/listing.html',
           controller: 'listingsCtrl',
           controllerAs: 'vm',
-          resolve: {
-            security: ['$q', 'Auth', function($q, Auth) {
-              if (Auth.getUserTypeSync() !== 'company'){
-                return $q.reject("Not Company");
-              }
-            }]
-          }
+          access: {restricted: (Auth) => Auth.getUserTypeSync() !== 'company'}
         })
-        .state('portfolio', {
-          url: '/portfolio',
+        .when('/portfolio', {
           templateUrl: './portfolio/portfolio.html',
           controller: 'portfolioCtrl',
           controllerAs: 'vm',
-          resolve: {
-            security: ['$q', 'Auth', function($q, Auth) {
-              if (Auth.getUserTypeSync() !== 'investor'){
-                return $q.reject("Not Investor");
-              }
-            }]
-          }
+          access: {restricted: (Auth) => Auth.getUserTypeSync() !== 'investor'}
         });
   }])
 
   // this is super hacky (got into a huge rabbit hole b/c of ui-router)
-  app.run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
-    $rootScope.$on('$stateChangeStart',
-      function(event, toState, toParams, fromState, fromParams, options){
-        Auth.getUserTypeAsync().then(() => {
-          $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
-            $state.go('home');
-          });
-        });
+  // app.run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
+  //   $rootScope.$on('$stateChangeStart',
+  //     function(event, toState, toParams, fromState, fromParams, options){
+  //       Auth.getUserTypeAsync().then(() => {
+  //         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
+  //           $state.go('home');
+  //         });
+  //       });
 
-    })
+  //   })
 
-
+  app.run([
+    '$rootScope',
+    '$location',
+    '$route',
+    'Auth',
+    function ($rootScope, $location, $route, Auth) {
+    $rootScope.$on('$routeChangeStart', (event, next, current) => {
+      Auth.getUserTypeAsync().then(() => {
+        if (next.access.restricted(Auth)) {
+          $location.path('/home');
+          $route.reload();
+        }
+      });
+    });
   }]);
+
+
+  // }]);
 
 
 })();

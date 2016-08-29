@@ -6,8 +6,8 @@ import offeringsCtrl from '../controllers/offerings.js'
 const apiRouter = express.Router();
 apiRouter
   .get('/offerings', offeringsCtrl.fetchOfferings)
-  .get('/offerings/:id', offeringsCtrl.fetchOffering);
-
+  .get('/offerings/:id', offeringsCtrl.fetchOffering)
+  .post('/offerings/:id', offeringsCtrl.postOffering);
 
 apiRouter
   .get('/listings', listingsCtrl.fetchListings)

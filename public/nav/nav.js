@@ -2,7 +2,7 @@
   'use strict';
   const app = angular.module('drakesCrowd')
 
-  app.controller('navCtrl', ['Auth', '$state', function(Auth, $state) {
+  app.controller('navCtrl', ['Auth', '$location', function(Auth, $location) {
     const vm = this;
 
     vm.noAuth = () => {
@@ -19,7 +19,7 @@
 
     vm.logout = () => {
       Auth.logout().then(() => {
-        $state.go('home');
+        $location.path('/home');
       });
     };
   }]);

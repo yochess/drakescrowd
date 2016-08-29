@@ -17,8 +17,8 @@
   <!-- Angular -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
-  <!-- Angular UI-Router -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+  <!-- Angular ngRoute -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
 
   <!-- MY CSS -->
   <link rel="stylesheet" href="./assets/css/main.css">
@@ -42,7 +42,7 @@
 
         <ul class="nav nav-pills pull-right">
 
-          <li role="presentation"><a ui-sref="home">Home</a></li>
+          <li role="presentation"><a href="#/home">Home</a></li>
 
           <!-- for Investors -->
           <li role="presentation" ng-show="vm.investorAuth()"><a href="#/portfolio">Portfolio</a></li>
@@ -51,11 +51,11 @@
           <li role="presentation" ng-show="vm.companyAuth()"><a href="#/listings">Listings</a></li>
 
           <!-- available to public -->
-          <li role="presentation"><a ui-sref="offerings">Offerings</a></li>
+          <li role="presentation"><a href="#/offerings">Offerings</a></li>
 
           <!-- available to only the public -->
-          <li role="presentation" ng-show="vm.noAuth()"><a ui-sref="signup">Signup</a></li>
-          <li role="presentation" ng-show="vm.noAuth()"><a ui-sref="login">Login</a></li>
+          <li role="presentation" ng-show="vm.noAuth()"><a href="#/signup">Signup</a></li>
+          <li role="presentation" ng-show="vm.noAuth()"><a href="#/login">Login</a></li>
 
           <!-- available only to logged in users -->
           <li role="presentation" ng-show="vm.investorAuth() || vm.companyAuth()">
@@ -67,7 +67,7 @@
       <h3 class="text-muted">Drake's Crowd</h3>
     </div>
 
-   <div ui-view class="view"></div>
+   <div ng-view class="view"></div>
 
     <footer class="footer">
       <p>&copy; 2016 Drake's Crowd.</p>

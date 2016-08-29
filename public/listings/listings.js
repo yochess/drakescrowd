@@ -4,13 +4,13 @@
   angular.module('drakesCrowd')
   .controller('listingsCtrl', [
     'Main',
-    '$stateParams',
-    function(Main, $stateParams) {
+    '$routeParams',
+    function(Main, $routeParams) {
       const vm = this;
 
       vm.listings = [];
       vm.listing = null;
-      vm.id = +$stateParams.id;
+      vm.id = +$routeParams.id;
       vm.info = {};
 
       const displayListings = () => {

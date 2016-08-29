@@ -49,7 +49,12 @@ const fetchOffering = (req, res) => {
   return res.send(data);
 };
 
+const postOffering = (req, res) => {
+
+};
+
 export default {
   fetchOfferings,
-  fetchOffering
+  fetchOffering,
+  postOffering
 };

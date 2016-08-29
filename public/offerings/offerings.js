@@ -4,13 +4,13 @@
   angular.module('drakesCrowd')
   .controller('offeringsCtrl', [
     'Main',
-    '$stateParams',
-    function(Main, $stateParams) {
+    '$routeParams',
+    function(Main, $routeParams) {
       const vm = this;
 
       vm.offerings = [];
       vm.offering = null;
-      vm.id = +$stateParams.id;
+      vm.id = +$routeParams.id;
 
       const displayOfferings = () => {
         Main.fetchOfferings()

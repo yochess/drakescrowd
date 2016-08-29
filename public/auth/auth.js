@@ -3,7 +3,7 @@
 
   const app = angular.module('drakesCrowd');
 
-  app.controller('authCtrl', ['Auth', '$state', function(Auth, $state) {
+  app.controller('authCtrl', ['Auth', '$location', function(Auth, $location) {
     const vm = this;
 
     vm.auth = {};
@@ -13,7 +13,7 @@
 
       Auth.signup(vm.auth).then(() => {
         const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
-        $state.go(link);
+        $location.path(link);
       })
 
       vm.auth = {};
@@ -24,7 +24,7 @@
 
       Auth.login(vm.auth).then(() => {
         const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
-        $state.go(link,{reload:true});
+        $location.path(link,{reload:true});
       });
 
       vm.auth = {};
