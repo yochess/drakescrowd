@@ -62,6 +62,13 @@
           })
       };
 
+      vm.process = (investment, accept) => {
+        Main.editListing(vm.id, investment, accept)
+          .then(res => {
+            displayListing();
+          });
+      };
+
     }]);
 
 })();

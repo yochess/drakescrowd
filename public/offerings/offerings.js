@@ -35,7 +35,7 @@
           .then(investment => { $location.path('/portfolio') });
       };
 
-      vm.isInvestor = () => Auth.getUserTypeSync();
+      vm.isInvestor = () => Auth.getUserTypeSync() === 'investor';
 
     }]);
 

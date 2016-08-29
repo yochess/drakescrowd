@@ -14,7 +14,7 @@ apiRouter
 
 apiRouter
   .get('/listings', isAuth('company'), listingsCtrl.fetchListings)
-  .get('/listings/:id', listingsCtrl.fetchListing)
+  .get('/listings/:id', isAuth('company'), listingsCtrl.fetchListing)
   .post('/listings', isAuth('company'), listingsCtrl.makeListing)
   .put('/listings/:id', isAuth('company'), listingsCtrl.editListing);
 

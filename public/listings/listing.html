@@ -1,9 +1,47 @@
 <div ng-show="vm.id" class="listingDetail">
 
-  <div class="investor-wrapper">
+  <div class="pending-investor">
     <h4>Pending Investors</h4>
-    <div ng-repeat="investor in vm.listing">
-      {{investor}}
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Investor</td>
+          <td>Investment Amount</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="investment in vm.listing.investments">
+          <td ng-if="investment.pending">{{investment.investor.username}}</td>
+          <td ng-if="investment.pending">{{investment.amount | currency}}</td>
+          <td ng-if="investment.pending">
+            <form>
+              Accept: <input type="checkbox" ng-click="vm.process(investment, 1)">
+              Decline: <input type="checkbox" ng-click="vm.process(investment, 0)">
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="accepted-investor">
+    <h4>Accepted Investors</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Investor</td>
+          <td>Amount</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="investment in vm.listing.investments">
+          <td ng-if="investment.approved">{{investment.investor.username}}</td>
+          <td ng-if="investment.approved">{{investment.amount | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
   </div>
 

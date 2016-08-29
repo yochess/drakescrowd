@@ -46,9 +46,17 @@
     };
 
     const makeListing = (data) => {
-      console.log(data);
       return $http
         .post('/api/listings', data)
+        .then(res => res.data);
+    };
+
+    const editListing = (id, investment, accept) => {
+      return $http
+        .put(`/api/listings/${id}`, {
+          investment: investment,
+          accept:accept
+        })
         .then(res => res.data);
     };
 
@@ -59,8 +67,9 @@
       fetchPortfolio,
       fetchListings,
       fetchListing,
-      makeListing
-    }
+      makeListing,
+      editListing
+    };
 
   }]);
 
