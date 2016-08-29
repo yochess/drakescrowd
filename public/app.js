@@ -7,6 +7,10 @@
     '$routeProvider',
     function($routeProvider) {
       $routeProvider
+        .when('/home', {
+          templateUrl: './home/home.html',
+          access: {restricted: () => false}
+        })
         .when('/signup', {
           templateUrl: './auth/investor-signup.html',
           controller: 'authCtrl',
@@ -29,10 +33,6 @@
           templateUrl: './auth/company-login.html',
           controller: 'authCtrl',
           controllerAs: 'vm',
-          access: {restricted: () => false}
-        })
-        .when('/home', {
-          templateUrl: './home/home.html',
           access: {restricted: () => false}
         })
         .when('/offerings', {
@@ -65,6 +65,10 @@
           controller: 'portfolioCtrl',
           controllerAs: 'vm',
           access: {restricted: (Auth) => Auth.getUserTypeSync() !== 'investor'}
+        })
+        .otherwise({
+          redirectTo: '/home',
+          access: {restricted: () => false}
         });
   }])
 

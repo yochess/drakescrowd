@@ -30,6 +30,7 @@
           <td>
             <span ng-if="investment.pending">PENDING</span>
             <span ng-if="investment.approved">APPROVED</span>
+            <span ng-if="!investment.pending && !investment.approved">DECLINED</span>
           </td>
         </tr>
       </tbody>
