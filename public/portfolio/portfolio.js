@@ -5,7 +5,8 @@
   .controller('portfolioCtrl', [
     'Main',
     '$routeParams',
-    function(Main, $routeParams) {
+    'Mathy',
+    function(Main, $routeParams, Mathy) {
       const vm = this;
 
       vm.portfolio = [];
@@ -13,29 +14,15 @@
       vm.id = +$routeParams.id;
 
       vm.sortConditions = {
-        name: null,
-        min: null
+        username: null,
+        marketprice: null,
+        approved: null
       };
 
-      vm.toPercent = (num) => `${num * 100}%`;
-      vm.sortBy = (type) => {
+      vm.toPercent = Mathy.toPercent;
 
-        vm.offerings = vm.offerings.sort((a, b) => {
-          if (!vm.sortConditions[type]) {
-            if (a[type] < b[type])
-              return -1;
-            if (a[type] > b[type])
-              return 1;
-            return 0;
-          } else {
-            if (b[type] < a[type])
-              return -1;
-            if (b[type] > a[type])
-              return 1;
-            return 0;
-          }
-        });
-        vm.sortConditions[type] = !vm.sortConditions[type];
+      vm.sortBy = (type) => {
+        Mathy.sortBy(vm.portfolio, vm.sortConditions, type);
       };
 
       vm.getInvestments = () => {

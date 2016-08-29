@@ -5,7 +5,8 @@
   .controller('listingsCtrl', [
     'Main',
     '$routeParams',
-    function(Main, $routeParams) {
+    'Mathy',
+    function(Main, $routeParams, Mathy) {
       const vm = this;
 
       vm.listings = [];
@@ -13,46 +14,7 @@
       vm.id = +$routeParams.id;
       vm.info = {};
 
-      const displayListings = () => {
-        Main.fetchListings()
-          .then(listings => {vm.listings = listings});
-      };
-
-      const displayListing = () => {
-        Main.fetchListing(vm.id)
-          .then(listing => {vm.listing = listing});
-      }
-
-      vm.id ? displayListing() : displayListings();
-
-      // below needs work
-
-      vm.sortConditions = {
-        name: null,
-        min: null
-      };
-
-      vm.toPercent = (num) => `${num * 100}%`;
-      vm.sortBy = (type) => {
-
-        vm.listings = vm.listings.sort((a, b) => {
-          if (!vm.sortConditions[type]) {
-            if (a[type] < b[type])
-              return -1;
-            if (a[type] > b[type])
-              return 1;
-            return 0;
-          } else {
-            if (b[type] < a[type])
-              return -1;
-            if (b[type] > a[type])
-              return 1;
-            return 0;
-          }
-        });
-        vm.sortConditions[type] = !vm.sortConditions[type];
-
-      };
+      vm.toPercent = Mathy.toPercent;
 
       vm.submit = () => {
         Main.makeListing(vm.info)
@@ -67,7 +29,7 @@
           .then(res => {displayListing()});
       };
 
-      vm.process = (investment, accept) => {
+      vm.acceptInvestment = (investment, accept) => {
         Main.acceptInvestment(vm.id, investment, accept)
         .then(res => {
           delete vm.min;
@@ -77,6 +39,26 @@
         });
       };
 
+      vm.sortConditions = {
+        name: null,
+        min: null
+      };
+
+      vm.sortBy = (type) => {
+        Mathy.sortBy(vm.listings, vm.sortConditions, type);
+      };
+
+      const displayListings = () => {
+        Main.fetchListings()
+          .then(listings => {vm.listings = listings});
+      };
+
+      const displayListing = () => {
+        Main.fetchListing(vm.id)
+          .then(listing => {vm.listing = listing});
+      }
+
+      vm.id ? displayListing() : displayListings();
     }]);
 
 })();

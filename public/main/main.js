@@ -2,11 +2,6 @@
   'use strict';
   const app = angular.module('drakesCrowd')
 
-  app.controller('mainCtrl', ['Auth', function(Auth) {
-    const vm = this;
-
-  }]);
-
   app.factory('Main', ['$http', function($http) {
 
     const fetchOfferings = () => {

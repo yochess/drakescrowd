@@ -6,14 +6,14 @@
     <table class="table">
       <thead>
         <tr>
-          <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('name')"></span></td>
+          <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('property.company.username')"></span></td>
           <td>Company</td>
           <td>Type</td>
-          <td>Market Price<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('marketprice')"></span></td>
+          <td>Market Price<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('property.marketprice')"></span></td>
           <td>Target Return</td>
           <td>Target Annual Cash</td>
           <td>Investment Amount</td>
-          <td>Approved</td>
+          <td>Approved<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('pending')"></span></td>
         </tr>
       </thead>
       <tbody>

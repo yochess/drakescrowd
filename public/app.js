@@ -33,8 +33,6 @@
         })
         .when('/home', {
           templateUrl: './home/home.html',
-          controller: 'mainCtrl',
-          controllerAs: 'vm',
           access: {restricted: () => false}
         })
         .when('/offerings', {

@@ -31,8 +31,8 @@
           <td ng-if="investment.pending">{{investment.amount | currency}}</td>
           <td ng-if="investment.pending">
             <form>
-              Accept: <input type="checkbox" ng-click="vm.process(investment, 1)">
-              Decline: <input type="checkbox" ng-click="vm.process(investment, 0)">
+              Accept: <input type="checkbox" ng-click="vm.acceptInvestment(investment, 1)">
+              Decline: <input type="checkbox" ng-click="vm.acceptInvestment(investment, 0)">
             </form>
           </td>
         </tr>
