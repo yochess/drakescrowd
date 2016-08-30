@@ -1,8 +1,12 @@
 'use strict';
 import Sequelize from 'sequelize';
 
-const sequelize = new Sequelize(process.env.SQL_DB || 'drakescrowd', process.env.SQL_USER || 'root', process.env.SQL_PW || '', {
-  logging: false
+// const sequelize = new Sequelize(process.env.SQL_DB || 'drakescrowd', process.env.SQL_USER || 'root', process.env.SQL_PW || '', {
+//   logging: false
+// });
+
+const sequelize = new Sequelize('postgres://localhost:5432/todo', {
+  logging:  false
 });
 
 const Investor = sequelize.define('investor', {
