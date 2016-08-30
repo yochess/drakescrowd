@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel-node": "babel-node --presets=es2015 --ignore='node_modules'",
-    "start": "nodemon --exec npm run babel-node -- src/app.js"
+    "start": "node dist/app.js"
   },
   "repository": {
     "type": "git",

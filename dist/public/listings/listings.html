@@ -1,0 +1,145 @@
+<div class="listings">
+
+  <!-- listings view -->
+  <div class="listings-view">
+    <h4>My Listings</h4>
+    <table class="table table-border">
+      <thead>
+        <tr>
+          <td>Name<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('name')"></span></td>
+          <td>Type</td>
+          <td>Min. Investment<span class="glyphicon glyphicon-sort" ng-click="vm.sortBy('min')"></span></td>
+          <td>Target Return</td>
+          <td>Target Annual Cash</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="listing in vm.listings">
+          <td><a href="/listings/{{listing.id}}">{{listing.name}}</a></td>
+          <td>{{listing.type}}</td>
+          <td>{{listing.min | currency}}</td>
+          <td>{{vm.toPercent(listing.irr)}}</td>
+          <td>{{vm.toPercent(listing.cash)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- end listings view -->
+
+  <!-- listings form -->
+  <div class="listings-form">
+    <h4>New Listing</h4>
+    <form class="form-horizontal" ng-submit="vm.submit()">
+
+      <!-- name input -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Name: </label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter Property Name" ng-model="vm.info.name">
+        </div>
+      </div>
+      <!-- end name input -->
+
+      <!-- image input -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Image Upload: </label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter IMG ADDRESS" ng-model="vm.info.img">
+        </div>
+      </div>
+      <!-- end input upload -->
+
+      <!-- property type -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Property Type: </label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter Property Type" ng-model="vm.info.type">
+        </div>
+      </div>
+      <!-- end property type -->
+
+      <!-- min investment -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Min Investment: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" placeholder="Enter Min Investment" ng-model="vm.info.min">
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <!-- end min investment -->
+
+      <!-- IRR -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Target IRR: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.irr">
+            <div class="input-group-addon">%</div>
+          </div>
+        </div>
+      </div>
+      <!-- end IRR -->
+
+      <!-- cash flow -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Target Cash: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.cash">
+            <div class="input-group-addon">%</div>
+          </div>
+        </div>
+      </div>
+      <!-- end cash flow -->
+
+      <!-- available $$ -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Shares Available (in dollars): </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon" ng-model="vm.info.shares">$</div>
+            <input type="text" class="form-control" placeholder="Enter Percentage" ng-model="vm.info.shares">
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <!-- end cash flow -->
+
+      <!--market price -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">House Value: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control" placeholder="Enter Value" ng-model="vm.info.marketprice">
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <!-- end IRR -->
+
+      <!-- additional description -->
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Additional Description: </label>
+        <div class="col-sm-4">
+          <div class="input-group">
+            <textarea class="form-control" rows="5" placeholder="Enter Description" ng-model="vm.info.additionaldetails"></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- end additional details -->
+
+      <!-- button -->
+      <div class="col-sm-2 text-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <!-- end button -->
+
+    </form>
+  </div>
+  <!-- end listings form -->
+
+</div>
