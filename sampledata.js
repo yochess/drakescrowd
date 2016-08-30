@@ -1,5 +1,5 @@
 'use strict';
-import db from './api/utils/dbconfig.js';
+import db from './src/api/utils/dbconfig.js';
 import bcrypt from 'bcryptjs';
 
 const encrypt = (password) => {
