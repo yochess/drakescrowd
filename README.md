@@ -1,5 +1,7 @@
 # drakescrowd
 
+App is running as a sample on https://drakescrowd.herokuapp.com
+
 prereq: 
   - make sure mysql is installed and running.
   - make sure node is installed.
