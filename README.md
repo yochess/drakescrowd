@@ -11,8 +11,9 @@ prereq:
 1. clone this repo
 2. cd into the repo
 3. run $ npm install
-4. create a "todo" database in postgres
-5. run $ npm start
+4. run $ gulp
+5. create a "drakescrowd" database in postgres
+6. run $ npm start
 
 <br><br>
 
