@@ -47,7 +47,7 @@ app.use((0, _expressSession2.default)({
 app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
 
-app.use(_express2.default.static('public'));
+app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 
 app.use('/auth', _auth2.default);
 app.use('/api', _api2.default);
