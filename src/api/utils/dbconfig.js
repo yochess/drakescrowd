@@ -5,7 +5,7 @@ import Sequelize from 'sequelize';
 //   logging: false
 // });
 
-const sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL || 'postgres://localhost:5432/todo', {
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/todo', {
   logging:  false
 });
 
