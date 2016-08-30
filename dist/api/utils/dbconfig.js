@@ -14,8 +14,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //   logging: false
 // });
 
-var sequelize = new _sequelize2.default(process.env.HEROKU_POSTGRESQL || 'postgres://localhost:5432/todo', {
-  logging: false
+var sequelize = new _sequelize2.default(process.env.DATABASE_URL || 'postgres://localhost:5432/todo', {
+  logging: false,
+  dialectOptions: { ssl: !!process.env.DATABASE_URL }
 });
 
 var Investor = sequelize.define('investor', {

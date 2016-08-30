@@ -6,7 +6,8 @@ import Sequelize from 'sequelize';
 // });
 
 const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/todo', {
-  logging:  false
+  logging: false,
+  dialectOptions: {ssl: !!process.env.DATABASE_URL}
 });
 
 const Investor = sequelize.define('investor', {
