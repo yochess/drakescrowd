@@ -48,7 +48,6 @@
               }
             },
             (evt) => {
-              console.log('in evt: ', evt);
             // Math.min is to fix IE which reports 200% sometimes
               file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });

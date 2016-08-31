@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 // used code from https://github.com/expressjs/multer/issues/170
 
 const storage = multer.diskStorage({
-  destination: 'uploads',
+  destination: process.env.build ? 'dist/uploads' : 'src/uploads',
   filename: function (req, file, cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
       if (err) return cb(err)
@@ -55,11 +55,12 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({storage: storage});
+console.log(path.join(__dirname, 'uploads'));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.post('/upload', upload.any(), (req, res) => {
   const file = req.files[0];
-  file.path = `${ADDRESS}/${file.path}`;
+  file.path = `${ADDRESS}/uploads/${file.filename}`;
   return res.status(201).send(file);
 });
 // end file uploading feature
