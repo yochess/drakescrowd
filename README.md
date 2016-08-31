@@ -1,30 +1,59 @@
 # drakescrowd
 
-App is running as a sample on https://drakescrowd.herokuapp.com
+App is running on https://drakescrowd.herokuapp.com
 
-prereq: 
+##prereq: 
   - make sure postgres is installed.
   - make sure node is installed.
+  - running commands such as babel-node may require additional setups (just follow what the terminal tells you to do).
 
-<br><br>
+##instructions:
+1. clone and cd into this repo
+    ```
+    $ git clone https://github.com/yochess/drakescrowd.git && cd drakescrowd
+    ```
+    
+2. install node dependencies
+    ```
+    $ npm install
+    ```
+    
+3. create a postgres database named drakescrowd  
+   (ps. you can swap out postgres db for mySQL db or any other supported SQL db in the dbconfig file)
+    ```
+    $ psql
+    # CREATE DATABASE drakescrowd;
+    # \q
+    ```
+    
+3. OPTIONAL: populate the db with sample data
+    ```
+    $ babel-node sampledata.js
+    ```
 
-1. clone this repo
-2. cd into the repo
-3. run $ npm install
-4. run $ gulp
-5. create a "drakescrowd" database in postgres
-6. run $ npm start
+4. start the server
+    ```
+    $ babel-node ./src/app.js
+    ```
+    or (with nodemon)
+    ```
+    $ nodemon ./src/app.js --exec babel-node --presets es2015
+    ```
 
-<br><br>
+##Deployment
+1. run the gulp build
+    ```
+    $ gulp build
+    ```
+    
+2. make sure the production version works
+    ```
+    $ env build=production node ./dist/app.js
+    ```
 
-If you like to populate table with sample data, run $ babel-node sampledata.js
-
-<br><br>
-
-The sample data has 2 investors and 2 companies:
-  - investor:
-    - username: drake, password: drake
-    - username: john, password: john
-  - company
-    - username: abc, password: abc,
-    - username: xyz, password: xyz
+3. goto www.heroku.com, login (or signup), click create a new project, and follow their instructions
+4. setup a db in heroku postgres (some research may be necessary)
+5. under settings, save the following env variables:
+    ADDRESS="your_link"
+    build=production
+    DATABASE_URL="your_db_link"
