@@ -12,8 +12,8 @@ import crypto from 'crypto';
 
 const app = express();
 // const FileStore = sessionFileStore(session);
-const HOST = process.env.HOST || 'localhost'
 const PORT = process.env.PORT || 3000;
+const ADDRESS = process.env.ADDRESS || 'http://localhost:3000';
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -59,7 +59,7 @@ const upload = multer({storage: storage});
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 app.post('/upload', upload.any(), (req, res) => {
   const file = req.files[0];
-  file.path = `http://${HOST}:${PORT}/${file.path}`;
+  file.path = `${ADDRESS}/${file.path}`;
   return res.status(201).send(file);
 });
 // end file uploading feature
