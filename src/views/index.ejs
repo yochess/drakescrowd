@@ -21,9 +21,15 @@
   <!-- Angular ngRoute -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
 
+  <!-- Angular file upload -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.5/ng-file-upload.min.js"></script>
+
   <!-- MY CSS -->
   <link rel="stylesheet" href="./assets/css/main.css">
 
+  <% if (process.env.build === "production") { %>
+  <script src="./bundle.js"></script>
+  <% } else { %>
   <!-- My Script s-->
   <script src="./app.js"></script>
   <script src="./main/main.js"></script>
@@ -33,6 +39,7 @@
   <script src="./offerings/offerings.js"></script>
   <script src="./listings/listings.js"></script>
   <script src="./portfolio/portfolio.js"></script>
+  <% } %>
 
   <title>Drake's Crowd</title>
 </head>

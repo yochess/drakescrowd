@@ -1,17 +1,28 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
+const gutil = require('gulp-util');
 
-gulp.task('js', () => {
-  return gulp.src('src/**/*.js')
-    .pipe(babel({
-        presets: ['es2015']
-    }))
-      .pipe(gulp.dest('dist'));
+gulp.task('build-backend', () => {
+  return gulp.src(['src/api/**/*.js', 'src/app.js'], {base: 'src'})
+    .pipe(babel({presets: ['es2015']}))
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('rest', () => {
+gulp.task('build-frontend', () => {
+  return gulp.src('src/public/**/*.js')
+    .pipe(babel({presets: ['es2015']}))
+    .pipe(sourcemaps.init())
+    .pipe(concat('bundle.js'))
+    .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('dist/public'));
+});
+
+gulp.task('build-rest', () => {
   return gulp.src(['src/**/*', '!src/**/*.js'])
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['js', 'rest']);
+gulp.task('default', ['build-backend', 'build-frontend', 'build-rest']);

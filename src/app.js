@@ -12,6 +12,9 @@ const app = express();
 // const FileStore = sessionFileStore(session);
 const PORT = process.env.PORT || 3000;
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -29,6 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
+
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 app.get('*', function(req, res, next) {
   return res.redirect('/#' + req.originalUrl);

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/app.js"
+    "serve": "env build=production node ./dist/app.js",
+    "start": "nodemon ./src/app.js --exec babel-node --presets es2015"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,17 @@
     "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2"
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.9"
   },
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
+    "ejs": "^2.5.1",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "gulp": "^3.9.1",

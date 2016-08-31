@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const app = angular.module('drakesCrowd', ['ngRoute'])
+  const app = angular.module('drakesCrowd', ['ngRoute', 'ngFileUpload'])
 
   app.config([
     '$routeProvider',
