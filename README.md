@@ -58,3 +58,7 @@ App is running on https://drakescrowd.herokuapp.com
     ADDRESS="your_link"
     build=production
     DATABASE_URL="your_db_link"
+
+##Current Issues
+- uploads storage needs to be permenant. Everytime the current app is pushed to heroku, the uploads folder in the dist folder is ignored. Consider using an online storage or a separate link to host images.
+- 
