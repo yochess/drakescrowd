@@ -6,7 +6,9 @@
     'Main',
     '$routeParams',
     'Mathy',
-    function(Main, $routeParams, Mathy) {
+    'Upload',
+    '$timeout',
+    function(Main, $routeParams, Mathy, Upload, $timeout) {
       const vm = this;
 
       vm.listings = [];
@@ -16,13 +18,43 @@
 
       vm.toPercent = Mathy.toPercent;
 
-      vm.submit = () => {
-        Main.makeListing(vm.info)
-          .then(data => {
-            displayListings();
-            vm.info = {};
-          })
-      };
+      // vm.submit = () => {
+      //   Main.makeListing(vm.info)
+      //     .then(data => {
+      //       displayListings();
+      //       vm.info = {};
+      //     })
+      // };
+
+      vm.submit = function(file) {
+          file.upload = Upload.upload({
+            url: '/upload',
+            data: {file: file},
+          });
+
+          file.upload.then(
+            (response) => {
+              $timeout(() => {
+                vm.info.img = response.data.path;
+                Main.makeListing(vm.info).then(data => {
+                  displayListings();
+                  vm.info = {};
+                });
+              });
+            },
+            (response) => {
+              if (response.status > 0) {
+                vm.errorMsg = response.status + ': ' + response.data;
+              }
+            },
+            (evt) => {
+              console.log('in evt: ', evt);
+            // Math.min is to fix IE which reports 200% sometimes
+              file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            });
+          }
+
+
 
       vm.editListing = (available, shares, min) => {
         Main.editListing(vm.id, available, shares, min)

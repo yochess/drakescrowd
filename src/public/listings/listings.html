@@ -29,7 +29,7 @@
   <!-- listings form -->
   <div class="listings-form">
     <h4>New Listing</h4>
-    <form class="form-horizontal" ng-submit="vm.submit()">
+    <form class="form-horizontal" name="listingform" ng-submit="vm.submit(picFile)">
 
       <!-- name input -->
       <div class="form-group">
@@ -44,7 +44,17 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Image Upload: </label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" placeholder="Enter IMG ADDRESS" ng-model="vm.info.img">
+          <!-- <input type="text" class="form-control" placeholder="Enter IMG ADDRESS" ng-model="vm.info.img"> -->
+          <input type="file" ngf-select ng-model="picFile" name="file"
+            accept="image/*" ngf-max-size="2MB" required
+            ngf-model-invalid="errorFile">
+          <i ng-show="listingform.file.$error.required">*required</i><br>
+          <i ng-show="listingform.file.$error.maxSize">
+            File too large
+            {{errorFile.size / 1000000|number:1}}MB: max 2M
+          </i>
+          <img ng-show="listingform.file.$valid" ngf-thumbnail="picFile" class="thumb">
+          <button ng-click="picFile = null" ng-show="picFile">Remove</button>
         </div>
       </div>
       <!-- end input upload -->
@@ -135,6 +145,12 @@
       <!-- button -->
       <div class="col-sm-2 text-center">
           <button type="submit" class="btn btn-primary">Submit</button>
+
+          <span class="progress" ng-show="picFile.progress >= 0">
+            <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+          </span>
+          <span ng-show="vm.info.img">Upload Successful</span>
+          <span class="err" ng-show="vm.errorMsg">{{vm.errorMsg}}</span>
       </div>
       <!-- end button -->
 

@@ -25,4 +25,4 @@ gulp.task('build-rest', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['build-backend', 'build-frontend', 'build-rest']);
+gulp.task('build', ['build-backend', 'build-frontend', 'build-rest']);
