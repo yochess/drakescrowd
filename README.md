@@ -51,7 +51,8 @@ App is running on https://drakescrowd.herokuapp.com
     $ env build=production node ./dist/app.js
     ```
 
-3. goto www.heroku.com, login (or signup), click create a new project, and follow their instructions
+3. goto www.heroku.com, login (or signup), click create a new project, and follow their instructions  
+    (note: a Procfile is not necessary for our app)
 4. setup a db in heroku postgres (some research may be necessary)
 5. under settings, save the following env variables:
     ADDRESS="your_link"
