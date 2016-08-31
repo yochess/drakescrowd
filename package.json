@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "gulp build",
-    "start": "env build=production node ./dist/app.js",
-    "start:dev": "nodemon ./src/app.js --exec babel-node --presets es2015"
+    "start": "env build=production node ./dist/app.js"
   },
   "repository": {
     "type": "git",
