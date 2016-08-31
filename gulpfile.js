@@ -3,6 +3,7 @@ const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
 const gutil = require('gulp-util');
+const uglify = require('gulp-uglify');
 
 gulp.task('build-backend', () => {
   return gulp.src(['src/api/**/*.js', 'src/app.js'], {base: 'src'})
