@@ -54,7 +54,7 @@
           min: min
         })
         .then(res => res.data);
-    }
+    };
 
     const acceptInvestment = (id, investment, accept) => {
       return $http

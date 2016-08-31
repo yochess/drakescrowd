@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/app.js --exec babel-node --presets es2015",
-    "build": "gulp build",
-    "serve": "env build=production node ./dist/app.js"
+    "postinstall": "gulp build",
+    "start": "node ./dist/app.js"
   },
   "repository": {
     "type": "git",
