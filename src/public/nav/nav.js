@@ -24,4 +24,12 @@
     };
   }]);
 
+  app.directive('drakebar', [function() {
+    return {
+      templateUrl: './nav/nav.html',
+      controller: 'navCtrl',
+      controllerAs: 'vm'
+    }
+  }]);
+
 })();
