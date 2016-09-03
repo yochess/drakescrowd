@@ -69,7 +69,7 @@
         })
         .state('listings', {
           parent: 'root',
-          url: '/listfolder',
+          url: '/listfolder', // renamed due to weird browser settings
           templateUrl: './listings/listings.html',
           controller: 'listingsCtrl',
           controllerAs: 'vm',
@@ -83,9 +83,9 @@
           controllerAs: 'vm',
           data: { role: 'company' }
         })
-        .state('portfolio', { // for some reason, portfolio is causing weird issues
+        .state('portfolio', {
           parent: 'root',
-          url: '/portfolder',
+          url: '/portfolder', // renamed due to weird browser settings
           templateUrl: './portfolio/portfolio.html',
           controller: 'portfolioCtrl',
           controllerAs: 'vm',
