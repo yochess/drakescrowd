@@ -17,9 +17,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="investment in vm.portfolio">
+        <tr ng-repeat="investment in vm.portfolio track by $index">
           <td>
-            <a href="/offerings/{{investment.property.id}}">{{investment.property.name}}</a>
+            <a ui-sref="offering({id: investment.property.id})">{{investment.property.name}}</a>
           </td>
           <td>{{investment.property.company.username}}</td>
           <td>{{investment.property.type}}</td>

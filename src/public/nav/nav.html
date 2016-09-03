@@ -2,20 +2,20 @@
 
   <ul class="nav nav-pills pull-right">
 
-    <li role="presentation"><a href="/home">Home</a></li>
+    <li role="presentation"><a ui-sref="home">Home</a></li>
 
     <!-- for Investors -->
-    <li role="presentation" ng-show="vm.investorAuth()"><a href="/portfolio">Portfolio</a></li>
+    <li role="presentation" ng-show="vm.investorAuth()"><a ui-sref="portfolio">Portfolio</a></li>
 
     <!-- for Real Estate Companies -->
-    <li role="presentation" ng-show="vm.companyAuth()"><a href="/listings">Listings</a></li>
+    <li role="presentation" ng-show="vm.companyAuth()"><a ui-sref="listings">Listings</a></li>
 
     <!-- available to public -->
-    <li role="presentation"><a href="/offerings">Offerings</a></li>
+    <li role="presentation"><a ui-sref="offerings">Offerings</a></li>
 
     <!-- available to only the public -->
-    <li role="presentation" ng-show="vm.noAuth()"><a href="/signup">Signup</a></li>
-    <li role="presentation" ng-show="vm.noAuth()"><a href="/login">Login</a></li>
+    <li role="presentation" ng-show="vm.noAuth()"><a ui-sref="signup">Signup</a></li>
+    <li role="presentation" ng-show="vm.noAuth()"><a ui-sref="login">Login</a></li>
 
     <!-- available only to logged in users -->
     <li role="presentation" ng-show="vm.investorAuth() || vm.companyAuth()">

@@ -4,16 +4,16 @@
   angular.module('drakesCrowd')
   .controller('listingsCtrl', [
     'Main',
-    '$routeParams',
+    '$stateParams',
     'Mathy',
     'Upload',
     '$timeout',
-    function(Main, $routeParams, Mathy, Upload, $timeout) {
+    function(Main, $stateParams, Mathy, Upload, $timeout) {
       const vm = this;
 
       vm.listings = [];
       vm.listing = null;
-      vm.id = +$routeParams.id;
+      vm.id = +$stateParams.id;
       vm.info = {};
 
       vm.toPercent = Mathy.toPercent;
@@ -81,7 +81,9 @@
 
       const displayListings = () => {
         Main.fetchListings()
-          .then(listings => {vm.listings = listings});
+          .then(listings => {
+            vm.listings = listings
+          });
       };
 
       const displayListing = () => {

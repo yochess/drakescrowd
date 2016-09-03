@@ -35,6 +35,7 @@
     };
 
     const fetchListing = (id) => {
+      console.log('hi???');
       return $http
         .get(`/api/listings/${id}`)
         .then(res => res.data);

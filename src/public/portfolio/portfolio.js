@@ -4,14 +4,12 @@
   angular.module('drakesCrowd')
   .controller('portfolioCtrl', [
     'Main',
-    '$routeParams',
     'Mathy',
-    function(Main, $routeParams, Mathy) {
+    function(Main, Mathy) {
       const vm = this;
 
       vm.portfolio = [];
       vm.investment = null;
-      vm.id = +$routeParams.id;
 
       vm.sortConditions = {
         username: null,

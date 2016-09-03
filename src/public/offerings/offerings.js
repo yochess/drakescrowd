@@ -4,14 +4,14 @@
   angular.module('drakesCrowd')
   .controller('offeringsCtrl', [
     'Main',
-    '$routeParams',
-    '$location',
+    '$stateParams',
+    '$state',
     'Auth',
     'Mathy',
-    function(Main, $routeParams, $location, Auth, Mathy) {
+    function(Main, $stateParams, $state, Auth, Mathy) {
       const vm = this;
 
-      vm.id = +$routeParams.id;
+      vm.id = +$stateParams.id;
       vm.offerings = [];
       vm.offering = null;
       vm.info = {};
@@ -23,7 +23,7 @@
       vm.submit = () => {
         vm.info.id = vm.id;
         Main.makeInvestment(vm.info)
-          .then(investment => { $location.path('/portfolio') });
+          .then(investment => { $state.go('portfolio') });
       };
 
       const displayOfferings = () => {

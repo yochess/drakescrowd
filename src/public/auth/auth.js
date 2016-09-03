@@ -3,34 +3,43 @@
 
   const app = angular.module('drakesCrowd');
 
-  app.controller('authCtrl', ['Auth', '$location', function(Auth, $location) {
-    const vm = this;
-
-    vm.auth = {};
-
-    vm.signup = (userType) => {
-      vm.auth.userType = userType;
-
-      Auth.signup(vm.auth).then(() => {
-        const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
-        $location.path(link);
-      })
+  app.controller('authCtrl', [
+    'Auth',
+    '$state',
+    '$window',
+    function(Auth, $state, $window) {
+      const vm = this;
 
       vm.auth = {};
-    };
 
-    vm.login = (userType) => {
-      vm.auth.userType = userType;
+      vm.signup = (userType) => {
+        vm.auth.userType = userType;
 
-      Auth.login(vm.auth).then(() => {
-        const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
-        $location.path(link,{reload:true});
-      });
+        Auth.signup(vm.auth).then(() => {
+          const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
+          const userType = link === 'portfolio' ? 'investor' : 'company';
+          $window.sessionStorage['userType'] = userType;
+          $state.go(link);
+        })
 
-      vm.auth = {};
-    };
+        vm.auth = {};
+      };
 
-  }]);
+      vm.login = (userType) => {
+        vm.auth.userType = userType;
+
+        Auth.login(vm.auth).then(() => {
+          const link = Auth.getUserTypeSync() === 'investor' ? 'portfolio' : 'listings';
+          const userType = link === 'portfolio' ? 'investor' : 'company';
+          $window.sessionStorage['userType'] = userType;
+          $state.go(link);
+        });
+
+        vm.auth = {};
+      };
+
+    }
+  ]);
 
   app.factory('Auth', ['$http', '$q', function($http, $q) {
     let userType = '';
